@@ -1,0 +1,15 @@
+syntax = "proto3";
+package test.v1;
+option go_package = "slash_mochi/gen/go/slash_mochi/v1/test;testv1";
+
+service TestService {
+    rpc Loopback(LoopbackRequest) returns (LoopbackResponse) {}
+}
+
+message LoopbackRequest {
+    string message = 1;
+}
+
+message LoopbackResponse {
+    string message = 1;
+}

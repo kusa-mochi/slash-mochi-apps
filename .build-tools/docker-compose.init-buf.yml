@@ -1,0 +1,13 @@
+version: "3.8"
+services:
+  buf_builder:
+    image: whoatemyapplepie/slash-mochi-buf-builder:0.1.0
+    build:
+      context: buf_builder
+      args:
+        - GO_VERSION=${GO_VERSION}
+        - NODE_VERSION=${NODE_VERSION}
+    volumes:
+      - ../:/project
+    working_dir: /project
+    command: bash -c "buf mod init"

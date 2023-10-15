@@ -1,0 +1,33 @@
+version: "3.8"
+services:
+  buf_builder:
+    image: whoatemyapplepie/slash-mochi-buf-builder:0.1.0
+    build:
+      context: buf_builder
+      args:
+        - GO_VERSION=${GO_VERSION}
+        - NODE_VERSION=${NODE_VERSION}
+    volumes:
+      - ../:/project
+    working_dir: /project
+    command: bash -c "rm -rf gen/ && buf generate"
+  server_builder:
+    image: whoatemyapplepie/slash-mochi-go-builder:0.1.0
+    build:
+      context: go_builder
+      args:
+        - GO_VERSION=${GO_VERSION}
+    volumes:
+      - ../:/project
+    working_dir: /project
+    command: bash -c "go mod tidy && cd ./cmd/server/ && env GOOS=linux GOARCH=${GO_ARCH} go build -o ${SERVER_PROGRAM_NAME}"
+  test_client_builder:
+    image: whoatemyapplepie/slash-mochi-node-builder:0.1.0
+    build:
+      context: node_builder
+      args:
+        - NODE_VERSION=${NODE_VERSION}
+    volumes:
+      - ../:/project
+    working_dir: /project
+    command: bash -c ""
