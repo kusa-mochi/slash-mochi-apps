@@ -30,4 +30,4 @@ services:
     volumes:
       - ../:/project
     working_dir: /project
-    command: bash -c ""
+    command: bash -c "rm -rf cmd/clients/test/.next/ cmd/clients/test/out/ && cd cmd/clients/test && npm i && npm run build"
