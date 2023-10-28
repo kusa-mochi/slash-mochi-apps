@@ -14,6 +14,9 @@ services:
     
   server_builder:
     image: whoatemyapplepie/slash-mochi-go-builder:0.1.0
+    depends_on:
+      buf_builder:
+        condition: service_completed_successfully
     build:
       context: go_builder
       args:
@@ -25,6 +28,9 @@ services:
     
   test_client_builder:
     image: whoatemyapplepie/slash-mochi-node-builder:0.1.0
+    depends_on:
+      buf_builder:
+        condition: service_completed_successfully
     build:
       context: node_builder
       args:

@@ -11,14 +11,17 @@ const inter = Inter({ subsets: ['latin'] })
 export default function Home() {
   const connectClient = useClient(TestService)
   const [loopbackResult, setLoopbackResult] = useState("")
+  const [clickCount, setClickCount] = useState(0)
+
   function DoLoopbackTest(message: string): void {
     connectClient.loopback({
-      message: message,
+      message: message + clickCount,
     }).then((res) => {
-      // setLoopbackResult(res.message)
-      console.log(res)
+      setLoopbackResult(res.message)
     })
+    setClickCount(clickCount + 1)
   }
+
   return (
     <>
       <Head>
