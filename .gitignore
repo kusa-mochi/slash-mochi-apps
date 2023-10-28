@@ -22,4 +22,5 @@ go.work
 
 dist/
 gen/
+cmd/server/slash_mochi_server
 cmd/clients/test/src/connect/
