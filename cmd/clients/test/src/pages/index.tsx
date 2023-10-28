@@ -3,17 +3,13 @@ import Image from 'next/image'
 import { Inter } from 'next/font/google'
 import styles from '@/styles/Home.module.css'
 import React, { useState } from 'react'
-import { createPromiseClient } from '@connectrpc/connect'
-import { createConnectTransport } from '@connectrpc/connect-web'
-import { TestService } from '@/../../../../gen/es/slash_mochi/v1/test/test_connect'
+import { TestService } from '@/connect/test_connect'
+import { useClient } from '@/connect_client/useClient'
 
 const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
-  const transport = createConnectTransport({
-    baseUrl: "http://localhost:3081",
-  })
-  const connectClient = createPromiseClient(TestService, transport)
+  const connectClient = useClient(TestService)
   const [loopbackResult, setLoopbackResult] = useState("")
   function DoLoopbackTest(message: string): void {
     connectClient.loopback({

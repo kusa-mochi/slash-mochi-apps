@@ -8,7 +8,11 @@ plugins:
     opt: paths=source_relative
   - plugin: es
     out: gen/es
-    opt: target=ts
+    opt:
+      - target=ts
+      - import_extension=.ts
   - plugin: connect-es
     out: gen/es
-    opt: target=ts
+    opt: 
+      - target=ts
+      - import_extension=.ts

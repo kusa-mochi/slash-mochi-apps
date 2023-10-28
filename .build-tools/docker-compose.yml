@@ -10,7 +10,8 @@ services:
     volumes:
       - ../:/project
     working_dir: /project
-    command: bash -c "rm -rf gen/ && go mod tidy && npx buf generate"
+    command: bash -c "rm -rf gen/ && go mod tidy && buf generate && rm -rf /project/cmd/clients/test/src/connect && mkdir -p /project/cmd/clients/test/src/connect && cp /project/gen/es/slash_mochi/v1/test/* /project/cmd/clients/test/src/connect/"
+    
   server_builder:
     image: whoatemyapplepie/slash-mochi-go-builder:0.1.0
     build:
@@ -21,6 +22,7 @@ services:
       - ../:/project
     working_dir: /project
     command: bash -c "go mod tidy && cd ./cmd/server/ && env GOOS=linux GOARCH=${GO_ARCH} go build -o ${SERVER_PROGRAM_NAME}"
+    
   test_client_builder:
     image: whoatemyapplepie/slash-mochi-node-builder:0.1.0
     build:
