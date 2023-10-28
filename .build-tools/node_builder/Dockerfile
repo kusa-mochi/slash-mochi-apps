@@ -6,7 +6,8 @@ RUN curl -L https://nodejs.org/dist/v${NODE_VERSION}/node-v${NODE_VERSION}-linux
     unlink /usr/local/CHANGELOG.md && unlink /usr/local/LICENSE && unlink /usr/local/README.md
 
 # install npm packages
-RUN npm i -g @bufbuild/buf @bufbuild/protoc-gen-connect-web @bufbuild/protoc-gen-es @bufbuild/connect @bufbuild/connect-web @bufbuild/protobuf
+RUN npm config set @buf:registry https://buf.build/gen/npm/v1 && \
+    npm i -g @connectrpc/connect @connectrpc/connect-web
 ENV PATH $PATH:/usr/local/bin/
 
 ENV LANG C.UTF-8

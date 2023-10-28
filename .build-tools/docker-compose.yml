@@ -10,7 +10,7 @@ services:
     volumes:
       - ../:/project
     working_dir: /project
-    command: bash -c "rm -rf gen/ && buf generate"
+    command: bash -c "rm -rf gen/ && go mod tidy && npx buf generate"
   server_builder:
     image: whoatemyapplepie/slash-mochi-go-builder:0.1.0
     build:
