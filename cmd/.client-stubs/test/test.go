@@ -1,23 +1,26 @@
-package main
+package test
 
 import (
 	"context"
 	"log"
-	"net/http"
 	testv1 "slash_mochi/gen/go/slash_mochi/v1/test"
 	"slash_mochi/gen/go/slash_mochi/v1/test/testv1connect"
 
 	"connectrpc.com/connect"
 )
 
-func main() {
-	serverAddrPort := "http://localhost:3081"
-	testClient := testv1connect.NewTestServiceClient(
-		http.DefaultClient,
-		serverAddrPort,
-	)
+type TestStub struct {
+	client *testv1connect.TestServiceClient
+}
 
-	res, err := testClient.Loopback(
+func NewTestStub(client *testv1connect.TestServiceClient) *TestStub {
+	return &TestStub{
+		client: client,
+	}
+}
+
+func (s *TestStub) TestLoopback() (string, bool) {
+	res, err := s.client.Loopback(
 		context.Background(),
 		connect.NewRequest(&testv1.LoopbackRequest{
 			Message: "hoge-",
@@ -25,7 +28,9 @@ func main() {
 	)
 	if err != nil {
 		log.Println(err)
+		return false
 	}
 
 	log.Println(res.Msg.GetMessage())
+	return "abc", true
 }
