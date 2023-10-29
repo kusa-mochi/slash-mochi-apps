@@ -1,0 +1,29 @@
+version: '3.8'
+services:
+  chrome:
+    image: whoatemyapplepie/slash-mochi-selenium-chrome:0.1.0
+    build: selenium_chrome
+    restart: unless-stopped
+    ports:
+      - 4444:4444
+      - 15900:5900
+    volumes:
+      - /dev/shm:/dev/shm
+      - /etc/localtime:/etc/localtime:ro
+      # - ./:/test
+    environment:
+      - SCREEN_WIDTH=1600
+      - SCREEN_HEIGHT=900
+    # working_dir: /test
+    # command: bash -c 'python3 ./test_tester.py'
+  test_tester:
+    image: whoatemyapplepie/slash-mochi-test-tester:0.1.0
+    # depends_on:
+    #   - chrome
+    build: test_tester
+    ports:
+      - 4444:4444
+    volumes:
+      - ./:/test
+    working_dir: /test
+    command: bash -c 'python3 ./test_tester.py'
