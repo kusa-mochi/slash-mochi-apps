@@ -1,3 +1,7 @@
+import '@fontsource/roboto/300.css'
+import '@fontsource/roboto/400.css'
+import '@fontsource/roboto/500.css'
+import '@fontsource/roboto/700.css'
 import Head from 'next/head'
 import Image from 'next/image'
 import { Inter } from 'next/font/google'
@@ -5,6 +9,7 @@ import styles from '@/styles/Home.module.css'
 import React, { useState } from 'react'
 import { TestService } from '@/connect/test_connect'
 import { useClient } from '@/connect_client/useClient'
+import Button from '@mui/material/Button'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -41,7 +46,8 @@ export default function Home() {
         <div className='loopback-result'>{loopbackResult}</div>
 
         <div className={styles.center}>
-          <button onClick={(event) => DoLoopbackTest("hoge-")}>Loopback</button>
+          {/* <button onClick={(event) => DoLoopbackTest("hoge-")}>Loopback</button> */}
+          <Button variant='contained' onClick={(event) => DoLoopbackTest("hoge-")}>Loopback</Button>
         </div>
       </main>
     </>
