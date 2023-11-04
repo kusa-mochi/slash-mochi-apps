@@ -41,8 +41,7 @@ services:
       - ../:/project
     working_dir: /project
     command:
-      /bin/bash -c '
-        go mod tidy &&
+      bash -c '
         cd ./cmd/server/ &&
         env GOOS=${GO_TARGET_OS} GOARCH=${GO_TARGET_ARCH} go build -o ${SERVER_PROGRAM_NAME}${SERVER_PROGRAM_EXT}'
     
@@ -61,7 +60,7 @@ services:
       - ../:/project
     working_dir: /project
     command: 
-      /bin/bash -c '
+      bash -c '
         rm -rf cmd/clients/test/.next/ cmd/clients/test/out/ &&
         cd cmd/clients/test &&
         npm i &&
@@ -85,4 +84,4 @@ services:
         mkdir -p /project/dist/${GO_TARGET_OS}/${GO_TARGET_ARCH}/server &&
         mkdir -p /project/dist/${GO_TARGET_OS}/${GO_TARGET_ARCH}/clients/test &&
         mv /project/cmd/server/${SERVER_PROGRAM_NAME}${SERVER_PROGRAM_EXT} /project/dist/${GO_TARGET_OS}/${GO_TARGET_ARCH}/server &&
-        mv -r /project/cmd/clients/test/out/* /project/dist/${GO_TARGET_OS}/${GO_TARGET_ARCH}/clients/test'
+        mv /project/cmd/clients/test/out/* /project/dist/${GO_TARGET_OS}/${GO_TARGET_ARCH}/clients/test'
