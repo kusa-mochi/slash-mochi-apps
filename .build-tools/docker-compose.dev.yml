@@ -1,0 +1,27 @@
+version: "3.8"
+services:
+  server_editor:
+    image: whoatemyapplepie/slash-mochi-go-builder:0.1.0
+    build:
+      context: go_builder
+      args:
+        - GO_VERSION=${GO_VERSION}
+        - GO_BUILDER_OS=${GO_BUILDER_OS}
+        - GO_BUILDER_ARCH=${GO_BUILDER_ARCH}
+    volumes:
+      - ../:/project
+    working_dir: /project
+    tty: true
+    
+  test_client_editor:
+    image: whoatemyapplepie/slash-mochi-node-builder:0.1.0
+    build:
+      context: node_builder
+      args:
+        - NODE_VERSION=${NODE_VERSION}
+        - NODE_BUILDER_OS=${NODE_BUILDER_OS}
+        - NODE_BUILDER_ARCH=${NODE_BUILDER_ARCH}
+    volumes:
+      - ../:/project
+    working_dir: /project
+    tty: true
