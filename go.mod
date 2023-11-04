@@ -8,4 +8,4 @@ require (
 	github.com/rs/cors v1.10.1
 )
 
-require google.golang.org/protobuf v1.31.0
+require google.golang.org/protobuf v1.31.0 // indirect

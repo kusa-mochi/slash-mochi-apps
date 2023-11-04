@@ -6,11 +6,25 @@ services:
       context: buf_builder
       args:
         - GO_VERSION=${GO_VERSION}
+        - GO_BUILDER_OS=${GO_BUILDER_OS}
+        - GO_BUILDER_ARCH=${GO_BUILDER_ARCH}
         - NODE_VERSION=${NODE_VERSION}
+        - NODE_BUILDER_OS=${NODE_BUILDER_OS}
+        - NODE_BUILDER_ARCH=${NODE_BUILDER_ARCH}
     volumes:
       - ../:/project
+    ports:
+      - 80:80
+      - 443:443
     working_dir: /project
-    command: bash -c "rm -rf gen/ && go mod tidy && buf generate && rm -rf /project/cmd/clients/test/src/connect && mkdir -p /project/cmd/clients/test/src/connect && cp /project/gen/es/slash_mochi/v1/test/* /project/cmd/clients/test/src/connect/"
+    command:
+      bash -c '
+        rm -rf gen/ &&
+        go mod tidy &&
+        buf generate --timeout 0s &&
+        rm -rf /project/cmd/clients/test/src/connect &&
+        mkdir -p /project/cmd/clients/test/src/connect &&
+        cp /project/gen/es/slash_mochi/v1/test/* /project/cmd/clients/test/src/connect/'
     
   server_builder:
     image: whoatemyapplepie/slash-mochi-go-builder:0.1.0
@@ -21,10 +35,15 @@ services:
       context: go_builder
       args:
         - GO_VERSION=${GO_VERSION}
+        - GO_BUILDER_OS=${GO_BUILDER_OS}
+        - GO_BUILDER_ARCH=${GO_BUILDER_ARCH}
     volumes:
       - ../:/project
     working_dir: /project
-    command: bash -c "go mod tidy && cd ./cmd/server/ && env GOOS=linux GOARCH=${GO_ARCH} go build -o ${SERVER_PROGRAM_NAME}"
+    command:
+      bash -c '
+        cd ./cmd/server/ &&
+        env GOOS=${GO_TARGET_OS} GOARCH=${GO_TARGET_ARCH} go build -o ${SERVER_PROGRAM_NAME}${SERVER_PROGRAM_EXT}'
     
   test_client_builder:
     image: whoatemyapplepie/slash-mochi-node-builder:0.1.0
@@ -35,7 +54,34 @@ services:
       context: node_builder
       args:
         - NODE_VERSION=${NODE_VERSION}
+        - NODE_BUILDER_OS=${NODE_BUILDER_OS}
+        - NODE_BUILDER_ARCH=${NODE_BUILDER_ARCH}
     volumes:
       - ../:/project
     working_dir: /project
-    command: bash -c "rm -rf cmd/clients/test/.next/ cmd/clients/test/out/ && cd cmd/clients/test && npm i && npm run build"
+    command: 
+      bash -c '
+        rm -rf cmd/clients/test/.next/ cmd/clients/test/out/ &&
+        cd cmd/clients/test &&
+        npm i &&
+        npm run build'
+
+  dist_builder:
+    image: whoatemyapplepie/slash-mochi-dist-builder:0.1.0
+    depends_on:
+      server_builder:
+        condition: service_completed_successfully
+      test_client_builder:
+        condition: service_completed_successfully
+    build:
+      context: dist_builder
+    volumes:
+      - ../:/project
+    working_dir: /project
+    command:
+      /bin/sh -c '
+        rm -rf /project/dist/${GO_TARGET_OS}/${GO_TARGET_ARCH} &&
+        mkdir -p /project/dist/${GO_TARGET_OS}/${GO_TARGET_ARCH}/server &&
+        mkdir -p /project/dist/${GO_TARGET_OS}/${GO_TARGET_ARCH}/clients/test &&
+        mv /project/cmd/server/${SERVER_PROGRAM_NAME}${SERVER_PROGRAM_EXT} /project/dist/${GO_TARGET_OS}/${GO_TARGET_ARCH}/server &&
+        mv /project/cmd/clients/test/out/* /project/dist/${GO_TARGET_OS}/${GO_TARGET_ARCH}/clients/test'
