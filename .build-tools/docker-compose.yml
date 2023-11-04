@@ -13,9 +13,6 @@ services:
         - NODE_BUILDER_ARCH=${NODE_BUILDER_ARCH}
     volumes:
       - ../:/project
-    ports:
-      - 80:80
-      - 443:443
     working_dir: /project
     command:
       bash -c '
