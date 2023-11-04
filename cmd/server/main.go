@@ -52,7 +52,7 @@ func main() {
 	var (
 		ipAddr            = flag.String("IpAddr", "127.0.0.1", "Server IP Addr (default=\"127.0.0.1\")")
 		connectServerPort = flag.Int("ConnectServerPort", 3081, "Connect server port number (default=3081)")
-		logPath           = flag.String("LogPath", "/var/slash-mochi/log.txt", "log file path (default=\"/var/slash-mochi/log.txt\")")
+		logPath           = flag.String("LogPath", "./log.txt", "log file path (default=\"./log.txt\")")
 	)
 	flag.Parse()
 
