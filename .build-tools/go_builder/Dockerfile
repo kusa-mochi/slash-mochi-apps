@@ -1,8 +1,10 @@
 FROM buildpack-deps:bullseye-curl
 ARG GO_VERSION
+ARG GO_BUILDER_OS
+ARG GO_BUILDER_ARCH
 
 # install go
-RUN curl -L https://go.dev/dl/go${GO_VERSION}.linux-amd64.tar.gz | tar xz -C /usr/local
+RUN curl -L https://go.dev/dl/go${GO_VERSION}.${GO_BUILDER_OS}-${GO_BUILDER_ARCH}.tar.gz | tar xz -C /usr/local
 ENV PATH $PATH:/usr/local/go/bin
 RUN go version
 

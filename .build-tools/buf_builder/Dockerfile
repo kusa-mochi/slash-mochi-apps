@@ -1,14 +1,18 @@
 FROM buildpack-deps:bullseye-curl
 ARG GO_VERSION
+ARG GO_BUILDER_OS
+ARG GO_BUILDER_ARCH
 ARG NODE_VERSION
+ARG NODE_BUILDER_OS
+ARG NODE_BUILDER_ARCH
 
 # install go
-RUN curl -L https://go.dev/dl/go${GO_VERSION}.linux-amd64.tar.gz | tar xz -C /usr/local
+RUN curl -L https://go.dev/dl/go${GO_VERSION}.${GO_BUILDER_OS}-${GO_BUILDER_ARCH}.tar.gz | tar xz -C /usr/local
 ENV PATH $PATH:/usr/local/go/bin
 RUN go version
 
 # install node.js
-RUN curl -L https://nodejs.org/dist/v${NODE_VERSION}/node-v${NODE_VERSION}-linux-x64.tar.gz | tar xz -C /usr/local --strip-components=1 && \
+RUN curl -L https://nodejs.org/dist/v${NODE_VERSION}/node-v${NODE_VERSION}-${NODE_BUILDER_OS}-${NODE_BUILDER_ARCH}.tar.gz | tar xz -C /usr/local --strip-components=1 && \
     unlink /usr/local/CHANGELOG.md && unlink /usr/local/LICENSE && unlink /usr/local/README.md
 
 # install go modules
