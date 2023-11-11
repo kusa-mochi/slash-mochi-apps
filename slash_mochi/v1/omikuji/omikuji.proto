@@ -1,0 +1,29 @@
+syntax = "proto3";
+package omikuji.v1;
+option go_package = "slash_mochi/gen/go/slash_mochi/v1/omikuji;omikujiv1";
+
+import "google/protobuf/empty.proto";
+
+service OmikujiService {
+    rpc OpenOmikuji(google.protobuf.Empty) returns (OmikujiResponse) {}
+}
+
+message OmikujiResponse {
+    enum ResultLevel {
+        DAIKICHI = 0;
+        KICHI = 1;
+        CHUUKICHI = 2;
+        SHOUKICHI = 3;
+        HANNKICHI = 4;
+        SUEKICHI = 5;
+        SUESHOUKICHI = 6;
+        TAIRA = 7;
+        KYOU = 8;
+        SHOUKYOU = 9;
+        HANNKYOU = 10;
+        SUEKYOU = 11;
+        DAIKYOU = 12;
+    }
+
+    ResultLevel result = 1;
+}
