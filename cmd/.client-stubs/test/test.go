@@ -31,7 +31,10 @@ func (t *TestServiceTester) Test() []test_common.TestResult {
 }
 
 func (t *TestServiceTester) testLoopback_Normal1() test_common.TestResult {
-	methodName := "testLoopback_Normal1"
+	ret := test_common.TestResult{
+		TestName:    test_common.GetCurrentMethodName(),
+		IsSucceeded: false,
+	}
 
 	res, err := t.connectClient.Loopback(
 		context.Background(),
@@ -40,17 +43,11 @@ func (t *TestServiceTester) testLoopback_Normal1() test_common.TestResult {
 		}),
 	)
 	if err != nil {
-		return test_common.TestResult{
-			methodName,
-			false,
-		}
+		return ret
 	}
-	result := res.Msg.Message == "response:test"
+	ret.IsSucceeded = res.Msg.Message == "response:test"
 
-	return test_common.TestResult{
-		methodName,
-		result,
-	}
+	return ret
 }
 
 // type TestStub struct {
