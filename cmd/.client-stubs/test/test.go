@@ -31,8 +31,10 @@ func (t *TestServiceTester) Test() []test_kit.TestResult {
 }
 
 func (t *TestServiceTester) testLoopback_Normal1() test_kit.TestResult {
+	// create new test result object.
 	ret := test_kit.NewTestResult()
 
+	// do test.
 	res, err := t.connectClient.Loopback(
 		context.Background(),
 		connect.NewRequest(&testv1.LoopbackRequest{
@@ -42,6 +44,8 @@ func (t *TestServiceTester) testLoopback_Normal1() test_kit.TestResult {
 	if err != nil {
 		return ret
 	}
+
+	// check result.
 	ret.IsSucceeded = res.Msg.Message == "response:test"
 
 	return ret
