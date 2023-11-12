@@ -3,7 +3,7 @@ package test_service_tester
 import (
 	"context"
 	"net/http"
-	"slash_mochi/cmd/.client-stubs/test_common"
+	"slash_mochi/cmd/.client-stubs/test_kit"
 	testv1 "slash_mochi/gen/go/slash_mochi/v1/test"
 	"slash_mochi/gen/go/slash_mochi/v1/test/testv1connect"
 
@@ -14,27 +14,24 @@ type TestServiceTester struct {
 	connectClient testv1connect.TestServiceClient
 }
 
-func NewTestServiceTester() *TestServiceTester {
+func NewTestServiceTester(targetUrl string) *TestServiceTester {
 	return &TestServiceTester{
 		connectClient: testv1connect.NewTestServiceClient(
 			http.DefaultClient,
-			"http://localhost:3081",
+			targetUrl,
 		),
 	}
 }
 
-func (t *TestServiceTester) Test() []test_common.TestResult {
-	ret := make([]test_common.TestResult, 0)
-	ret = append(ret, t.testLoopback_Normal1())
-
-	return ret
+func (t *TestServiceTester) Test() []test_kit.TestResult {
+	return test_kit.RunTests(
+		t.testLoopback_Normal1(),
+		t.testLoopback_Normal2(),
+	)
 }
 
-func (t *TestServiceTester) testLoopback_Normal1() test_common.TestResult {
-	ret := test_common.TestResult{
-		TestName:    test_common.GetCurrentMethodName(),
-		IsSucceeded: false,
-	}
+func (t *TestServiceTester) testLoopback_Normal1() test_kit.TestResult {
+	ret := test_kit.NewTestResult()
 
 	res, err := t.connectClient.Loopback(
 		context.Background(),
@@ -50,28 +47,19 @@ func (t *TestServiceTester) testLoopback_Normal1() test_common.TestResult {
 	return ret
 }
 
-// type TestStub struct {
-// 	client *testv1connect.TestServiceClient
-// }
+func (t *TestServiceTester) testLoopback_Normal2() test_kit.TestResult {
+	ret := test_kit.NewTestResult()
 
-// func NewTestStub(client *testv1connect.TestServiceClient) *TestStub {
-// 	return &TestStub{
-// 		client: client,
-// 	}
-// }
+	res, err := t.connectClient.Loopback(
+		context.Background(),
+		connect.NewRequest(&testv1.LoopbackRequest{
+			Message: "hello",
+		}),
+	)
+	if err != nil {
+		return ret
+	}
+	ret.IsSucceeded = res.Msg.Message == "response:hello"
 
-// func (s *TestStub) TestLoopback() (string, bool) {
-// 	res, err := s.client.Loopback(
-// 		context.Background(),
-// 		connect.NewRequest(&testv1.LoopbackRequest{
-// 			Message: "hoge-",
-// 		}),
-// 	)
-// 	if err != nil {
-// 		log.Println(err)
-// 		return false
-// 	}
-
-// 	log.Println(res.Msg.GetMessage())
-// 	return "abc", true
-// }
+	return ret
+}

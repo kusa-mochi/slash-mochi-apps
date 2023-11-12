@@ -1,4 +1,4 @@
-package test_common
+package test_kit
 
 import (
 	"runtime"
@@ -10,12 +10,23 @@ type TestResult struct {
 	IsSucceeded bool
 }
 
+func NewTestResult() TestResult {
+	return TestResult{
+		TestName:    GetCurrentMethodNameWithLevel(2),
+		IsSucceeded: false,
+	}
+}
+
 type Tester interface {
 	Test() []TestResult
 }
 
-func GetCurrentMethodName() string {
-	pc, _, _, ok := runtime.Caller(1)
+func RunTests(r ...TestResult) []TestResult {
+	return r
+}
+
+func GetCurrentMethodNameWithLevel(level int) string {
+	pc, _, _, ok := runtime.Caller(level)
 	if !ok {
 		return ""
 	}
@@ -31,4 +42,8 @@ func GetCurrentMethodName() string {
 	}
 
 	return splittedFullName[lenSplittedFullName-1]
+}
+
+func GetCurrentMethodName() string {
+	return GetCurrentMethodNameWithLevel(1)
 }
