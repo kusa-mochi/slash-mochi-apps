@@ -8,7 +8,9 @@ import (
 	"log"
 	"net/http"
 	"os"
+	omikuji_service "slash_mochi/cmd/server/omikuji"
 	test_service "slash_mochi/cmd/server/test"
+	"slash_mochi/gen/go/slash_mochi/v1/omikuji/omikujiv1connect"
 	"slash_mochi/gen/go/slash_mochi/v1/test/testv1connect"
 
 	"connectrpc.com/connect"
@@ -70,9 +72,16 @@ func main() {
 
 	mux := newServeMuxWithReflection()
 	interceptor := newInterCeptors()
+
+	// test service
 	testService := test_service.NewTestService()
 	testPath, testHandler := testv1connect.NewTestServiceHandler(testService, interceptor)
 	mux.Handle(testPath, testHandler)
+
+	// omikuji service
+	omikujiService := omikuji_service.NewOmikujiService()
+	omikujiPath, omikujiHandler := omikujiv1connect.NewOmikujiServiceHandler(omikujiService, interceptor)
+	mux.Handle(omikujiPath, omikujiHandler)
 
 	// TODO: make CORS rules.
 	c := cors.AllowAll()
