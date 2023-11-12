@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"log"
 	"os"
+	omikuji_service_tester "slash_mochi/cmd/.client-stubs/omikuji"
 	test_service_tester "slash_mochi/cmd/.client-stubs/test"
 	"slash_mochi/cmd/.client-stubs/test_kit"
 )
@@ -42,5 +43,8 @@ func main() {
 	targetUrl := fmt.Sprintf("http://%s:%v", testConfig.Target.Ip, testConfig.Target.Port)
 
 	testServiceTester := test_service_tester.NewTestServiceTester(targetUrl)
+	omikujiServiceTester := omikuji_service_tester.NewOmikujiServiceTester(targetUrl)
+
 	RunTest(testServiceTester)
+	RunTest(omikujiServiceTester)
 }
