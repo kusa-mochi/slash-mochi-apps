@@ -11,9 +11,9 @@ func RunTest(runner test_common.Tester) {
 	nResult := len(results)
 	for iResult := 0; iResult < nResult; iResult++ {
 		if results[iResult].IsSucceeded {
-			fmt.Printf("\x1b32mok\x1b[0m|%s\n", results[iResult].TestName)
+			fmt.Printf("o | %s\n", results[iResult].TestName)
 		} else {
-			fmt.Printf("\x1b31mng\x1b[0m|%s\n", results[iResult].TestName)
+			fmt.Printf("x | %s\n", results[iResult].TestName)
 		}
 	}
 }
