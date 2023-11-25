@@ -12,12 +12,9 @@ services:
         - NODE_BUILDER_OS=${NODE_BUILDER_OS}
         - NODE_BUILDER_ARCH=${NODE_BUILDER_ARCH}
     ports:
-      - 80:80
-      - 443:443
-      - 3000:3000
-      - 3001:3001
-      - 3081:3081
-      - 3082:3082
+      - 4000:3000
+      - 4080:3080
+      - 4081:3081
     volumes:
       - ../:/project
     working_dir: /project
