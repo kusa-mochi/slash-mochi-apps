@@ -26,7 +26,7 @@ func NewOmikujiServiceTester(targetUrl string) *OmikujiServiceTester {
 
 func (t *OmikujiServiceTester) Test() []test_kit.TestResult {
 	return test_kit.RunTests(
-		t.testOpen100_Omikuji(),
+		t.testOpen200_Omikuji(),
 	)
 }
 

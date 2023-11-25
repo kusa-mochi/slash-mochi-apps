@@ -1,6 +1,6 @@
 version: "3.8"
 services:
-  node_go_editor:
+  node-go-editor:
     image: whoatemyapplepie/slash-mochi-buf-builder:0.1.0
     build:
       context: buf_builder
@@ -15,7 +15,9 @@ services:
       - 80:80
       - 443:443
       - 3000:3000
+      - 3001:3001
       - 3081:3081
+      - 3082:3082
     volumes:
       - ../:/project
     working_dir: /project

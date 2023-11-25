@@ -1,6 +1,6 @@
 version: "3.8"
 services:
-  buf_builder:
+  buf-builder:
     image: whoatemyapplepie/slash-mochi-buf-builder:0.1.0
     build:
       context: buf_builder
@@ -23,13 +23,16 @@ services:
         go mod tidy &&
         buf generate --timeout 0s &&
         rm -rf /project/cmd/clients/test/src/connect &&
+        rm -rf /project/cmd/clients/omikuji/connect &&
         mkdir -p /project/cmd/clients/test/src/connect &&
-        cp /project/gen/es/slash_mochi/v1/test/* /project/cmd/clients/test/src/connect/'
+        mkdir -p /project/cmd/clients/omikuji/connect &&
+        cp /project/gen/es/slash_mochi/v1/test/* /project/cmd/clients/test/src/connect/ &&
+        cp /project/gen/es/slash_mochi/v1/omikuji/* /project/cmd/clients/omikuji/connect/'
     
-  server_builder:
+  server-builder:
     image: whoatemyapplepie/slash-mochi-go-builder:0.1.0
     depends_on:
-      buf_builder:
+      buf-builder:
         condition: service_completed_successfully
     build:
       context: go_builder
@@ -45,10 +48,10 @@ services:
         cd ./cmd/server/ &&
         env GOOS=${GO_TARGET_OS} GOARCH=${GO_TARGET_ARCH} go build -o ${SERVER_PROGRAM_NAME}${SERVER_PROGRAM_EXT}'
     
-  test_client_builder:
+  test-client-builder:
     image: whoatemyapplepie/slash-mochi-node-builder:0.1.0
     depends_on:
-      buf_builder:
+      buf-builder:
         condition: service_completed_successfully
     build:
       context: node_builder
@@ -66,12 +69,12 @@ services:
         npm i &&
         npm run build'
 
-  dist_builder:
+  dist-builder:
     image: whoatemyapplepie/slash-mochi-dist-builder:0.1.0
     depends_on:
-      server_builder:
+      server-builder:
         condition: service_completed_successfully
-      test_client_builder:
+      test-client-builder:
         condition: service_completed_successfully
     build:
       context: dist_builder

@@ -18,6 +18,44 @@ import (
 	"github.com/rs/cors"
 )
 
+func webServerRoutine(ipAddr string, port int, dirPath string) {
+
+	// debug -->
+	log.Println(dirPath)
+	log.Println(http.Dir(dirPath))
+	log.Printf("%#v",
+		http.FileServer(
+			http.Dir(dirPath),
+		),
+	)
+	log.Printf("%#v",
+		http.StripPrefix(
+			"/",
+			http.FileServer(
+				http.Dir(dirPath),
+			),
+		),
+	)
+	// <-- debug
+
+	http.Handle(
+		"/",
+		http.StripPrefix(
+			"/",
+			http.FileServer(
+				http.Dir(dirPath),
+			),
+		),
+	)
+	log.Println("listening requests to the web server...")
+	log.Fatal(
+		http.ListenAndServe(
+			fmt.Sprintf("%s:%v", ipAddr, port),
+			nil,
+		),
+	)
+}
+
 func newServeMuxWithReflection() *http.ServeMux {
 	mux := http.NewServeMux()
 	reflector := grpcreflect.NewStaticReflector(
@@ -54,6 +92,7 @@ func main() {
 	var (
 		ipAddr            = flag.String("IpAddr", "127.0.0.1", "Server IP Addr (default=\"127.0.0.1\")")
 		connectServerPort = flag.Int("ConnectServerPort", 3081, "Connect server port number (default=3081)")
+		webServerPort     = flag.Int("WebServerPort", 80, "Web Server port number (default=80)")
 		logPath           = flag.String("LogPath", "./log.txt", "log file path (default=\"./log.txt\")")
 	)
 	flag.Parse()
@@ -87,7 +126,14 @@ func main() {
 	c := cors.AllowAll()
 	corsHandler := c.Handler(mux)
 
-	log.Println("listening...")
+	// start the web server
+	go webServerRoutine(
+		*ipAddr,
+		*webServerPort,
+		"/project/dist/linux/amd64/clients/test",
+	)
+
+	log.Println("listening requests to the connect server...")
 
 	log.Fatal(
 		http.ListenAndServe(

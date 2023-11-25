@@ -1,6 +1,6 @@
 version: "3.8"
 services:
-  buf_builder:
+  buf-builder:
     image: whoatemyapplepie/slash-mochi-buf-builder:0.1.0
     build:
       context: buf_builder
