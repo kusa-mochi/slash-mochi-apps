@@ -92,7 +92,7 @@ func main() {
 	var (
 		ipAddr            = flag.String("IpAddr", "127.0.0.1", "Server IP Addr (default=\"127.0.0.1\")")
 		connectServerPort = flag.Int("ConnectServerPort", 3081, "Connect server port number (default=3081)")
-		webServerPort     = flag.Int("WebServerPort", 80, "Web Server port number (default=80)")
+		webServerPort     = flag.Int("WebServerPort", 3080, "Web Server port number (default=3080)")
 		logPath           = flag.String("LogPath", "./log.txt", "log file path (default=\"./log.txt\")")
 	)
 	flag.Parse()
