@@ -13,7 +13,7 @@ export default function Home() {
   var transport: Transport
   var connectClient: PromiseClient<typeof OmikujiService>
   useEffect(() => {
-    const baseUrl: string = `http://${window.location.hostname}:3082`
+    const baseUrl: string = `http://${window.location.hostname}:3081`
     console.log(baseUrl)
     transport = createConnectTransport({
       baseUrl: baseUrl,
