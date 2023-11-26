@@ -1,5 +1,12 @@
 {
     "name": "slash_mochi_apps",
-    "forwardPorts": [3000, 3080, 3081],
-    "appPort": ["4000:3000", "4080:3080", "4081:3081"]
+    "dockerComposeFile": ["./docker-compose.editor.yml"],
+    "service": "node-go-editor",
+    "customizations": {
+        "vscode": {
+            "settings": {
+                "remoe.autoForwardPorts": false
+            }
+        }
+    }
 }
