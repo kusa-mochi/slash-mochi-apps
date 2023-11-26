@@ -14,7 +14,7 @@ services:
     ports:
       - 4000:3000
       - 4080:3080
-      - 4081:3081
+      - 4090:3090
     volumes:
       - ../:/project
     working_dir: /project
