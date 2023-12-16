@@ -26,8 +26,8 @@ services:
         rm -rf /project/cmd/clients/omikuji/connect &&
         mkdir -p /project/cmd/clients/test/src/connect &&
         mkdir -p /project/cmd/clients/omikuji/connect &&
-        cp /project/gen/es/slash_mochi/v1/test/* /project/cmd/clients/test/src/connect/ &&
-        cp /project/gen/es/slash_mochi/v1/omikuji/* /project/cmd/clients/omikuji/connect/'
+        cp -r /project/gen/es/slash_mochi/v1/test/* /project/cmd/clients/test/src/connect/ &&
+        cp -r /project/gen/es/slash_mochi/v1/omikuji/* /project/cmd/clients/omikuji/connect/'
     
   server-builder:
     image: whoatemyapplepie/slash-mochi-go-builder:0.1.0
@@ -68,6 +68,27 @@ services:
         cd cmd/clients/test &&
         npm i &&
         npm run build'
+  
+  omikuji-client-builder:
+    image: whoatemyapplepie/slash-mochi-node-builder:0.1.0
+    depends_on:
+      buf-builder:
+        condition: service_completed_successfully
+    build:
+      context: node_builder
+      args:
+        - NODE_VERSION=${NODE_VERSION}
+        - NODE_BUILDER_OS=${NODE_BUILDER_OS}
+        - NODE_BUILDER_ARCH=${NODE_BUILDER_ARCH}
+    volumes:
+      - ../:/project
+    working_dir: /project
+    command:
+      bash -c '
+        rm -rf cmd/clients/omikuji/.next/ cmd/clients/omikuji/out/ &&
+        cd cmd/clients/omikuji &&
+        npm i &&
+        npm run build'
 
   dist-builder:
     image: whoatemyapplepie/slash-mochi-dist-builder:0.1.0
@@ -75,6 +96,8 @@ services:
       server-builder:
         condition: service_completed_successfully
       test-client-builder:
+        condition: service_completed_successfully
+      omikuji-client-builder:
         condition: service_completed_successfully
     build:
       context: dist_builder
@@ -86,5 +109,7 @@ services:
         rm -rf /project/dist/${GO_TARGET_OS}/${GO_TARGET_ARCH} &&
         mkdir -p /project/dist/${GO_TARGET_OS}/${GO_TARGET_ARCH}/server &&
         mkdir -p /project/dist/${GO_TARGET_OS}/${GO_TARGET_ARCH}/clients/test &&
-        mv /project/cmd/server/${SERVER_PROGRAM_NAME}${SERVER_PROGRAM_EXT} /project/dist/${GO_TARGET_OS}/${GO_TARGET_ARCH}/server &&
-        mv /project/cmd/clients/test/out/* /project/dist/${GO_TARGET_OS}/${GO_TARGET_ARCH}/clients/test'
+        mkdir -p /project/dist/${GO_TARGET_OS}/${GO_TARGET_ARCH}/clients/omikuji &&
+        cp -r /project/cmd/server/${SERVER_PROGRAM_NAME}${SERVER_PROGRAM_EXT} /project/dist/${GO_TARGET_OS}/${GO_TARGET_ARCH}/server &&
+        cp -r /project/cmd/clients/test/out/* /project/dist/${GO_TARGET_OS}/${GO_TARGET_ARCH}/clients/test &&
+        cp -r /project/cmd/clients/omikuji/out/* /project/dist/${GO_TARGET_OS}/${GO_TARGET_ARCH}/clients/omikuji'
