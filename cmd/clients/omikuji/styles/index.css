@@ -20,23 +20,23 @@
 		opacity: 1.0;
 	} 15% {
 		-webkit-animation-timing-function: linear;
-		-webkit-transform: translate(-40px,0px) scale(1,1) rotate(0deg) skew(0deg,0deg);
+		-webkit-transform: translate(-40px,0px) scale(1,1) rotate(5deg) skew(0deg,0deg);
 		opacity: 1.0;
 	} 26% {
 		-webkit-animation-timing-function: linear;
-		-webkit-transform: translate(40px,0px) scale(1,1) rotate(0deg) skew(0deg,0deg);
+		-webkit-transform: translate(40px,0px) scale(1,1) rotate(-5deg) skew(0deg,0deg);
 		opacity: 1.0;
 	} 37% {
 		-webkit-animation-timing-function: linear;
-		-webkit-transform: translate(-30px,0px) scale(1,1) rotate(0deg) skew(0deg,0deg);
+		-webkit-transform: translate(-30px,0px) scale(1,1) rotate(5deg) skew(0deg,0deg);
 		opacity: 1.0;
 	} 52% {
 		-webkit-animation-timing-function: linear;
-		-webkit-transform: translate(30px,0px) scale(1,1) rotate(0deg) skew(0deg,0deg);
+		-webkit-transform: translate(30px,0px) scale(1,1) rotate(-5deg) skew(0deg,0deg);
 		opacity: 1.0;
 	} 68% {
 		-webkit-animation-timing-function: ease-out;
-		-webkit-transform: translate(-30px,0px) scale(1,1) rotate(0deg) skew(0deg,0deg);
+		-webkit-transform: translate(-30px,0px) scale(1,1) rotate(5deg) skew(0deg,0deg);
 		opacity: 1.0;
 	} 
 }
@@ -52,23 +52,23 @@
 		opacity: 1.0;
 	} 15% {
 		animation-timing-function: linear;
-		transform: translate(-40px,0px) scale(1,1) rotate(0deg) skew(0deg,0deg);
+		transform: translate(-40px,0px) scale(1,1) rotate(5deg) skew(0deg,0deg);
 		opacity: 1.0;
 	} 26% {
 		animation-timing-function: linear;
-		transform: translate(40px,0px) scale(1,1) rotate(0deg) skew(0deg,0deg);
+		transform: translate(40px,0px) scale(1,1) rotate(-5deg) skew(0deg,0deg);
 		opacity: 1.0;
 	} 37% {
 		animation-timing-function: linear;
-		transform: translate(-30px,0px) scale(1,1) rotate(0deg) skew(0deg,0deg);
+		transform: translate(-30px,0px) scale(1,1) rotate(5deg) skew(0deg,0deg);
 		opacity: 1.0;
 	} 52% {
 		animation-timing-function: linear;
-		transform: translate(30px,0px) scale(1,1) rotate(0deg) skew(0deg,0deg);
+		transform: translate(30px,0px) scale(1,1) rotate(-5deg) skew(0deg,0deg);
 		opacity: 1.0;
 	} 68% {
 		animation-timing-function: ease-out;
-		transform: translate(-30px,0px) scale(1,1) rotate(0deg) skew(0deg,0deg);
+		transform: translate(-30px,0px) scale(1,1) rotate(5deg) skew(0deg,0deg);
 		opacity: 1.0;
 	} 
 }
