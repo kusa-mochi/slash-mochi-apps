@@ -1,0 +1,152 @@
+2023/12/16 10:51:05 listening requests to the connect server...
+2023/12/16 10:51:05 /project/dist/linux/amd64/clients
+2023/12/16 10:51:05 &http.fileHandler{root:"/project/dist/linux/amd64/clients"}
+2023/12/16 10:51:05 (http.HandlerFunc)(0x7d1e00)
+2023/12/16 10:51:05 listening requests to the web server...
+2023/12/16 10:51:19 start /omikuji.v1.OmikujiService/OpenOmikuji
+2023/12/16 10:51:19 end /omikuji.v1.OmikujiService/OpenOmikuji
+2023/12/16 10:51:29 start /omikuji.v1.OmikujiService/OpenOmikuji
+2023/12/16 10:51:29 end /omikuji.v1.OmikujiService/OpenOmikuji
+2023/12/16 10:51:41 start /omikuji.v1.OmikujiService/OpenOmikuji
+2023/12/16 10:51:41 end /omikuji.v1.OmikujiService/OpenOmikuji
+2023/12/16 10:54:39 listening requests to the connect server...
+2023/12/16 10:54:39 /project/dist/linux/amd64/clients
+2023/12/16 10:54:39 &http.fileHandler{root:"/project/dist/linux/amd64/clients"}
+2023/12/16 10:54:39 (http.HandlerFunc)(0x7d1e00)
+2023/12/16 10:54:39 listening requests to the web server...
+2023/12/16 10:54:50 start /omikuji.v1.OmikujiService/OpenOmikuji
+2023/12/16 10:54:50 end /omikuji.v1.OmikujiService/OpenOmikuji
+2023/12/16 11:03:16 listening requests to the connect server...
+2023/12/16 11:03:16 /project/dist/linux/amd64/clients
+2023/12/16 11:03:16 &http.fileHandler{root:"/project/dist/linux/amd64/clients"}
+2023/12/16 11:03:16 (http.HandlerFunc)(0x7d1e00)
+2023/12/16 11:03:16 listening requests to the web server...
+2023/12/16 11:03:25 start /omikuji.v1.OmikujiService/OpenOmikuji
+2023/12/16 11:03:25 end /omikuji.v1.OmikujiService/OpenOmikuji
+2023/12/16 13:24:10 listening requests to the connect server...
+2023/12/16 13:24:10 /project/dist/linux/amd64/clients
+2023/12/16 13:24:10 &http.fileHandler{root:"/project/dist/linux/amd64/clients"}
+2023/12/16 13:24:10 (http.HandlerFunc)(0x7d1e00)
+2023/12/16 13:24:10 listening requests to the web server...
+2023/12/16 13:24:25 start /omikuji.v1.OmikujiService/OpenOmikuji
+2023/12/16 13:24:25 end /omikuji.v1.OmikujiService/OpenOmikuji
+2023/12/16 13:24:42 start /omikuji.v1.OmikujiService/OpenOmikuji
+2023/12/16 13:24:42 end /omikuji.v1.OmikujiService/OpenOmikuji
+2023/12/16 13:29:33 start /omikuji.v1.OmikujiService/OpenOmikuji
+2023/12/16 13:29:33 end /omikuji.v1.OmikujiService/OpenOmikuji
+2023/12/16 13:30:03 start /omikuji.v1.OmikujiService/OpenOmikuji
+2023/12/16 13:30:03 end /omikuji.v1.OmikujiService/OpenOmikuji
+2023/12/16 13:32:37 listening requests to the connect server...
+2023/12/16 13:32:37 /project/dist/linux/amd64/clients
+2023/12/16 13:32:37 &http.fileHandler{root:"/project/dist/linux/amd64/clients"}
+2023/12/16 13:32:37 (http.HandlerFunc)(0x7d1e00)
+2023/12/16 13:32:37 listening requests to the web server...
+2023/12/16 13:32:45 start /omikuji.v1.OmikujiService/OpenOmikuji
+2023/12/16 13:32:45 end /omikuji.v1.OmikujiService/OpenOmikuji
+2023/12/16 13:34:45 listening requests to the connect server...
+2023/12/16 13:34:45 /project/dist/linux/amd64/clients
+2023/12/16 13:34:45 &http.fileHandler{root:"/project/dist/linux/amd64/clients"}
+2023/12/16 13:34:45 (http.HandlerFunc)(0x7d1e00)
+2023/12/16 13:34:45 listening requests to the web server...
+2023/12/16 13:34:50 start /omikuji.v1.OmikujiService/OpenOmikuji
+2023/12/16 13:34:50 end /omikuji.v1.OmikujiService/OpenOmikuji
+2023/12/16 13:38:13 listening requests to the connect server...
+2023/12/16 13:38:13 /project/dist/linux/amd64/clients
+2023/12/16 13:38:13 &http.fileHandler{root:"/project/dist/linux/amd64/clients"}
+2023/12/16 13:38:13 (http.HandlerFunc)(0x7d1e00)
+2023/12/16 13:38:13 listening requests to the web server...
+2023/12/16 13:38:21 start /omikuji.v1.OmikujiService/OpenOmikuji
+2023/12/16 13:38:21 end /omikuji.v1.OmikujiService/OpenOmikuji
+2023/12/16 13:39:15 listening requests to the connect server...
+2023/12/16 13:39:15 /project/dist/linux/amd64/clients
+2023/12/16 13:39:15 &http.fileHandler{root:"/project/dist/linux/amd64/clients"}
+2023/12/16 13:39:15 (http.HandlerFunc)(0x7d1e00)
+2023/12/16 13:39:15 listening requests to the web server...
+2023/12/16 13:39:20 start /omikuji.v1.OmikujiService/OpenOmikuji
+2023/12/16 13:39:20 end /omikuji.v1.OmikujiService/OpenOmikuji
+2023/12/16 13:50:12 listening requests to the connect server...
+2023/12/16 13:50:12 /project/dist/linux/amd64/clients
+2023/12/16 13:50:12 &http.fileHandler{root:"/project/dist/linux/amd64/clients"}
+2023/12/16 13:50:12 (http.HandlerFunc)(0x7d1e00)
+2023/12/16 13:50:12 listening requests to the web server...
+2023/12/16 13:50:18 start /omikuji.v1.OmikujiService/OpenOmikuji
+2023/12/16 13:50:18 end /omikuji.v1.OmikujiService/OpenOmikuji
+2023/12/16 13:50:27 start /omikuji.v1.OmikujiService/OpenOmikuji
+2023/12/16 13:50:27 end /omikuji.v1.OmikujiService/OpenOmikuji
+2023/12/16 13:57:54 start /omikuji.v1.OmikujiService/OpenOmikuji
+2023/12/16 13:57:54 end /omikuji.v1.OmikujiService/OpenOmikuji
+2023/12/16 13:59:46 listening requests to the connect server...
+2023/12/16 13:59:46 /project/dist/linux/amd64/clients
+2023/12/16 13:59:46 &http.fileHandler{root:"/project/dist/linux/amd64/clients"}
+2023/12/16 13:59:46 (http.HandlerFunc)(0x7d1e00)
+2023/12/16 13:59:46 listening requests to the web server...
+2023/12/16 13:59:51 start /omikuji.v1.OmikujiService/OpenOmikuji
+2023/12/16 13:59:51 end /omikuji.v1.OmikujiService/OpenOmikuji
+2023/12/16 13:59:55 start /omikuji.v1.OmikujiService/OpenOmikuji
+2023/12/16 13:59:55 end /omikuji.v1.OmikujiService/OpenOmikuji
+2023/12/16 13:59:56 start /omikuji.v1.OmikujiService/OpenOmikuji
+2023/12/16 13:59:56 end /omikuji.v1.OmikujiService/OpenOmikuji
+2023/12/16 13:59:57 start /omikuji.v1.OmikujiService/OpenOmikuji
+2023/12/16 13:59:57 end /omikuji.v1.OmikujiService/OpenOmikuji
+2023/12/16 14:01:27 listening requests to the connect server...
+2023/12/16 14:01:27 /project/dist/linux/amd64/clients
+2023/12/16 14:01:27 &http.fileHandler{root:"/project/dist/linux/amd64/clients"}
+2023/12/16 14:01:27 (http.HandlerFunc)(0x7d1e00)
+2023/12/16 14:01:27 listening requests to the web server...
+2023/12/16 14:01:32 start /omikuji.v1.OmikujiService/OpenOmikuji
+2023/12/16 14:01:32 end /omikuji.v1.OmikujiService/OpenOmikuji
+2023/12/16 14:01:37 start /omikuji.v1.OmikujiService/OpenOmikuji
+2023/12/16 14:01:37 end /omikuji.v1.OmikujiService/OpenOmikuji
+2023/12/16 14:01:38 start /omikuji.v1.OmikujiService/OpenOmikuji
+2023/12/16 14:01:38 end /omikuji.v1.OmikujiService/OpenOmikuji
+2023/12/16 14:03:21 listening requests to the connect server...
+2023/12/16 14:03:21 /project/dist/linux/amd64/clients
+2023/12/16 14:03:21 &http.fileHandler{root:"/project/dist/linux/amd64/clients"}
+2023/12/16 14:03:21 (http.HandlerFunc)(0x7d1e00)
+2023/12/16 14:03:21 listening requests to the web server...
+2023/12/16 14:03:28 start /omikuji.v1.OmikujiService/OpenOmikuji
+2023/12/16 14:03:28 end /omikuji.v1.OmikujiService/OpenOmikuji
+2023/12/16 14:03:34 start /omikuji.v1.OmikujiService/OpenOmikuji
+2023/12/16 14:03:34 end /omikuji.v1.OmikujiService/OpenOmikuji
+2023/12/16 14:03:36 start /omikuji.v1.OmikujiService/OpenOmikuji
+2023/12/16 14:03:36 end /omikuji.v1.OmikujiService/OpenOmikuji
+2023/12/16 14:08:50 listening requests to the connect server...
+2023/12/16 14:08:50 /project/dist/linux/amd64/clients
+2023/12/16 14:08:50 &http.fileHandler{root:"/project/dist/linux/amd64/clients"}
+2023/12/16 14:08:50 (http.HandlerFunc)(0x7d1e00)
+2023/12/16 14:08:50 listening requests to the web server...
+2023/12/16 14:08:54 start /omikuji.v1.OmikujiService/OpenOmikuji
+2023/12/16 14:08:54 end /omikuji.v1.OmikujiService/OpenOmikuji
+2023/12/16 14:08:59 start /omikuji.v1.OmikujiService/OpenOmikuji
+2023/12/16 14:08:59 end /omikuji.v1.OmikujiService/OpenOmikuji
+2023/12/16 14:09:06 start /omikuji.v1.OmikujiService/OpenOmikuji
+2023/12/16 14:09:06 end /omikuji.v1.OmikujiService/OpenOmikuji
+2023/12/16 14:14:53 listening requests to the connect server...
+2023/12/16 14:14:53 /project/dist/linux/amd64/clients
+2023/12/16 14:14:53 &http.fileHandler{root:"/project/dist/linux/amd64/clients"}
+2023/12/16 14:14:53 (http.HandlerFunc)(0x7d1e00)
+2023/12/16 14:14:53 listening requests to the web server...
+2023/12/16 14:15:07 start /omikuji.v1.OmikujiService/OpenOmikuji
+2023/12/16 14:15:07 end /omikuji.v1.OmikujiService/OpenOmikuji
+2023/12/16 14:15:11 start /omikuji.v1.OmikujiService/OpenOmikuji
+2023/12/16 14:15:11 end /omikuji.v1.OmikujiService/OpenOmikuji
+2023/12/16 14:15:12 start /omikuji.v1.OmikujiService/OpenOmikuji
+2023/12/16 14:15:12 end /omikuji.v1.OmikujiService/OpenOmikuji
+2023/12/16 14:15:15 start /omikuji.v1.OmikujiService/OpenOmikuji
+2023/12/16 14:15:15 end /omikuji.v1.OmikujiService/OpenOmikuji
+2023/12/16 14:19:09 listening requests to the connect server...
+2023/12/16 14:19:09 /project/dist/linux/amd64/clients
+2023/12/16 14:19:09 &http.fileHandler{root:"/project/dist/linux/amd64/clients"}
+2023/12/16 14:19:09 (http.HandlerFunc)(0x7d1e00)
+2023/12/16 14:19:09 listening requests to the web server...
+2023/12/16 14:19:16 start /omikuji.v1.OmikujiService/OpenOmikuji
+2023/12/16 14:19:16 end /omikuji.v1.OmikujiService/OpenOmikuji
+2023/12/16 14:21:59 listening requests to the connect server...
+2023/12/16 14:21:59 /project/dist/linux/amd64/clients
+2023/12/16 14:21:59 &http.fileHandler{root:"/project/dist/linux/amd64/clients"}
+2023/12/16 14:21:59 (http.HandlerFunc)(0x7d1e00)
+2023/12/16 14:21:59 listening requests to the web server...
+2023/12/16 14:22:04 start /omikuji.v1.OmikujiService/OpenOmikuji
+2023/12/16 14:22:04 end /omikuji.v1.OmikujiService/OpenOmikuji
+2023/12/16 14:22:14 start /omikuji.v1.OmikujiService/OpenOmikuji
+2023/12/16 14:22:14 end /omikuji.v1.OmikujiService/OpenOmikuji

@@ -14,12 +14,14 @@ export default function Home() {
   var connectClient: PromiseClient<typeof OmikujiService> = createPromiseClient(OmikujiService, transport)
 
   const [omikujiResult, setOmikujiResult] = useState(OmikujiResponse_ResultLevel[OmikujiResponse_ResultLevel.TAIRA])
+  const [isShrineAnimating, setIsShrineAnimating] = useState(false)
   const [garagaraUseSound] = useSound('./garagara2.mp3')
   const [osaisenUseSound] = useSound('./osaisen3.mp3')
 
   function Omikuji(): void {
     console.log("opening omikuji...")
 
+    setIsShrineAnimating((prev) => true)
     osaisenUseSound()
     setTimeout(() => garagaraUseSound(), 1600)
 
@@ -43,7 +45,7 @@ export default function Home() {
     //   </div>
     // </main>
     <div className='flex flex-col items-center'>
-      <div>
+      <div className={`animated ${isShrineAnimating ? "shrine" : ""}`}>
         <img src='jinja.png'/>
       </div>
       <div>
