@@ -18,11 +18,10 @@ import (
 	"github.com/rs/cors"
 )
 
-func webServerRoutine(ipAddr string, port int, dirPath string) {
+func webServerRoutine(port int, dirPath string) {
 
 	// debug -->
 	log.Println(dirPath)
-	log.Println(http.Dir(dirPath))
 	log.Printf("%#v",
 		http.FileServer(
 			http.Dir(dirPath),
@@ -50,7 +49,7 @@ func webServerRoutine(ipAddr string, port int, dirPath string) {
 	log.Println("listening requests to the web server...")
 	log.Fatal(
 		http.ListenAndServe(
-			fmt.Sprintf("%s:%v", ipAddr, port),
+			fmt.Sprintf("0.0.0.0:%v", port),
 			nil,
 		),
 	)
@@ -90,7 +89,7 @@ func newInterCeptors() connect.Option {
 func main() {
 	// get args
 	var (
-		ipAddr            = flag.String("IpAddr", "127.0.0.1", "Server IP Addr (default=\"127.0.0.1\")")
+		// ipAddr            = flag.String("IpAddr", "127.0.0.1", "Server IP Addr (default=\"127.0.0.1\")")
 		connectServerPort = flag.Int("ConnectServerPort", 3090, "Connect server port number (default=3090)")
 		webServerPort     = flag.Int("WebServerPort", 3080, "Web Server port number (default=3080)")
 		logPath           = flag.String("LogPath", "./log.txt", "log file path (default=\"./log.txt\")")
@@ -128,16 +127,15 @@ func main() {
 
 	// start the web server
 	go webServerRoutine(
-		*ipAddr,
 		*webServerPort,
-		"/project/dist/linux/amd64/clients/test",
+		"/project/dist/linux/amd64/clients",
 	)
 
 	log.Println("listening requests to the connect server...")
 
 	log.Fatal(
 		http.ListenAndServe(
-			fmt.Sprintf("%s:%v", *ipAddr, *connectServerPort),
+			fmt.Sprintf("0.0.0.0:%v", *connectServerPort),
 			corsHandler,
 		),
 	)
