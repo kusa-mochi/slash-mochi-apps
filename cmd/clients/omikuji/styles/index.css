@@ -1,3 +1,7 @@
+.shrine-layout {
+	position: relative;
+}
+
 .animated {
 	-webkit-animation-duration: 1.5s;
 	animation-duration: 1.5s;
@@ -73,13 +77,20 @@
 	} 
 }
 
-.shrine-container {
-	position: relative;
-}
-
 .shrine {
 	-webkit-animation-name: shrine;
 	animation-name: shrine;
 	-webkit-transform-origin: center center;
 	transform-origin: center center;
+}
+
+.result-container {
+	position: absolute;
+	top: 140px;
+	left: 206px;
+	border: 18px solid #121940;
+	background-color: #faf7ed;
+	font-family: "YujiSyuku-Regular";
+	font-size: 140px;
+	writing-mode: vertical-rl;
 }

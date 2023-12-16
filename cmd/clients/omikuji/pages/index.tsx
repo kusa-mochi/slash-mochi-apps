@@ -13,7 +13,54 @@ export default function Home() {
   var transport: Transport = createConnectTransport({baseUrl: 'http://localhost:3090'})
   var connectClient: PromiseClient<typeof OmikujiService> = createPromiseClient(OmikujiService, transport)
 
-  const [omikujiResult, setOmikujiResult] = useState(OmikujiResponse_ResultLevel[OmikujiResponse_ResultLevel.TAIRA])
+  function ResultLevelToKanji(level: OmikujiResponse_ResultLevel): string {
+    let ret: string = ""
+    switch(level) {
+      case OmikujiResponse_ResultLevel.DAIKICHI:
+        ret = "大吉"
+        break;
+      case OmikujiResponse_ResultLevel.KICHI:
+        ret = "吉"
+        break;
+      case OmikujiResponse_ResultLevel.CHUUKICHI:
+        ret = "中吉"
+        break;
+      case OmikujiResponse_ResultLevel.SHOUKICHI:
+        ret = "小吉"
+        break;
+      case OmikujiResponse_ResultLevel.HANNKICHI:
+        ret = "半吉"
+        break;
+      case OmikujiResponse_ResultLevel.SUEKICHI:
+        ret = "末吉"
+        break;
+        case OmikujiResponse_ResultLevel.SUESHOUKICHI:
+        ret = "末小吉"
+        break;
+      case OmikujiResponse_ResultLevel.TAIRA:
+        ret = "平"
+        break;
+      case OmikujiResponse_ResultLevel.KYOU:
+        ret = "凶"
+        break;
+      case OmikujiResponse_ResultLevel.SHOUKYOU:
+        ret = "小凶"
+        break;
+      case OmikujiResponse_ResultLevel.HANNKYOU:
+        ret = "半凶"
+        break;
+      case OmikujiResponse_ResultLevel.SUEKYOU:
+        ret = "末凶"
+        break;
+      case OmikujiResponse_ResultLevel.DAIKYOU:
+        ret = "大凶"
+        break;
+    }
+
+    return ret
+  }
+
+  const [omikujiResult, setOmikujiResult] = useState(ResultLevelToKanji(OmikujiResponse_ResultLevel.TAIRA))
   const [isShrineAnimating, setIsShrineAnimating] = useState(false)
   const [garagaraUseSound] = useSound('./garagara2.mp3')
   const [osaisenUseSound] = useSound('./osaisen3.mp3')
@@ -26,7 +73,7 @@ export default function Home() {
     setTimeout(() => garagaraUseSound(), 1600)
 
     connectClient.openOmikuji({}).then((res) => {
-      setOmikujiResult(OmikujiResponse_ResultLevel[res.result])
+      setOmikujiResult(ResultLevelToKanji(res.result))
     }).catch((reason) => {
       console.log(reason)
     })
@@ -45,14 +92,14 @@ export default function Home() {
     //   </div>
     // </main>
     <div className='flex flex-col items-center'>
-      <div className={`animated ${isShrineAnimating ? "shrine" : ""}`}>
+      <div className={`shrine-layout animated ${isShrineAnimating ? "shrine" : ""}`}>
         <img src='jinja.png'/>
+        <div className='result-container'>
+          {omikujiResult}
+        </div>
       </div>
       <div>
         <button onClick={Omikuji}>おみくじを引く</button>
-      </div>
-      <div>
-        結果：{omikujiResult}
       </div>
       <div>
         <a href="https://pocket-se.info/">ポケットサウンド/効果音素材</a>
