@@ -17,16 +17,6 @@ export default function Home() {
   const [garagaraUseSound] = useSound('./garagara2.mp3')
   const [osaisenUseSound] = useSound('./osaisen3.mp3')
 
-  // useEffect(() => {
-  //   // new a connect client
-  //   const baseUrl: string = `http://${window.location.hostname}:3090`
-  //   console.log(baseUrl)
-  //   transport = createConnectTransport({
-  //     baseUrl: baseUrl,
-  //   })
-  //   connectClient = createPromiseClient(OmikujiService, transport)
-  // }, [])
-
   function Omikuji(): void {
     console.log("opening omikuji...")
 
@@ -34,10 +24,8 @@ export default function Home() {
     setTimeout(() => garagaraUseSound(), 1600)
 
     connectClient.openOmikuji({}).then((res) => {
-      console.log(res)
       setOmikujiResult(OmikujiResponse_ResultLevel[res.result])
     }).catch((reason) => {
-      console.log("error")
       console.log(reason)
     })
   }
