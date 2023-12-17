@@ -138,3 +138,7 @@
 .open-button:hover {
 	background-color: #e3eeff;
 }
+
+.sound-credit-container {
+	margin: 16px 0 0 0;
+}
