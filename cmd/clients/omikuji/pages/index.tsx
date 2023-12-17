@@ -102,7 +102,7 @@ export default function Home() {
         <button onClick={Omikuji} className='open-button' hidden={isShrineAnimating}>おみくじを引く</button>
       </div>
       <div>
-        <a href="https://pocket-se.info/">ポケットサウンド/効果音素材</a>
+        <a href="https://pocket-se.info/" target="_blank">ポケットサウンド/効果音素材</a>
       </div>
     </div>
   )
