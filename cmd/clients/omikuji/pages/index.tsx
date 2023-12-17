@@ -94,12 +94,12 @@ export default function Home() {
     <div className='flex flex-col items-center'>
       <div className={`shrine-layout animated ${isShrineAnimating ? "shrine" : ""}`}>
         <img src='jinja.png'/>
-        <div className='result-container'>
+        <div className={`result-container result-animated ${isShrineAnimating ? "result--showing" : "result--not-showing"}`}>
           {omikujiResult}
         </div>
       </div>
       <div>
-        <button onClick={Omikuji}>おみくじを引く</button>
+        <button onClick={Omikuji} className='open-button' hidden={isShrineAnimating}>おみくじを引く</button>
       </div>
       <div>
         <a href="https://pocket-se.info/">ポケットサウンド/効果音素材</a>

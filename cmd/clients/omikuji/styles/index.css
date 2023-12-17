@@ -94,3 +94,47 @@
 	font-size: 140px;
 	writing-mode: vertical-rl;
 }
+
+.result-animated {
+	-webkit-animation-duration: 1s;
+	animation-duration: 1s;
+	-webkit-animation-fill-mode: both;
+	animation-fill-mode: both;
+	-webkit-animation-iteration-count: 1;
+	animation-iteration-count: 1;
+	-webkit-animation-delay: 3.1s;
+	animation-delay: 3.1s;
+}
+
+@keyframes result {
+	from {
+		animation-timing-function: linear;
+		opacity: 0;
+	} to {
+		animation-timing-function: linear;
+		opacity: 1;
+	}
+}
+
+.result--not-showing {
+	opacity: 0;
+}
+
+.result--showing {
+	-webkit-animation-name: result;
+	animation-name: result;
+	-webkit-transform-origin: center center;
+	transform-origin: center center;
+}
+
+.open-button {
+	margin: 0;
+	padding: 16px;
+	border: none;
+	border-radius: 4px;
+	box-shadow: 0px 0px 8px black;
+}
+
+.open-button:hover {
+	background-color: #e3eeff;
+}
