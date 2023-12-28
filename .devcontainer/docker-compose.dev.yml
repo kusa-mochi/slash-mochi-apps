@@ -5,11 +5,12 @@ services:
     volumes:
       - ../:/project
     ports:
-      - 3080:3080
+      - 80:80
       - 3090:3090
     working_dir: /project
     command:
       bash -c '
         [ -d ./dist ] &&
-        chmod +x /project/dist/${GO_TARGET_OS}/${GO_TARGET_ARCH}/server/slash_mochi_server &&
-        /project/dist/${GO_TARGET_OS}/${GO_TARGET_ARCH}/server/slash_mochi_server -WebServerPort 3080 -ConnectServerPort 3090'
+        cd /project/dist/${GO_TARGET_OS}/${GO_TARGET_ARCH}/server &&
+        chmod +x ./slash_mochi_server &&
+        ./slash_mochi_server'
