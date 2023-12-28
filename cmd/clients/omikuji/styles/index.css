@@ -25,19 +25,19 @@
 		opacity: 1.0;
 	} 12.5% {
 		-webkit-animation-timing-function: linear;
-		-webkit-transform: translate(-40px,0px) scale(1,1) rotate(2deg) skew(0deg,0deg);
+		-webkit-transform: translate(-20px,0px) scale(1,1) rotate(2deg) skew(0deg,0deg);
 		opacity: 1.0;
 	} 37.5% {
 		-webkit-animation-timing-function: linear;
-		-webkit-transform: translate(40px,0px) scale(1,1) rotate(-2deg) skew(0deg,0deg);
+		-webkit-transform: translate(20px,0px) scale(1,1) rotate(-2deg) skew(0deg,0deg);
 		opacity: 1.0;
 	} 62.5% {
 		-webkit-animation-timing-function: linear;
-		-webkit-transform: translate(-30px,0px) scale(1,1) rotate(2deg) skew(0deg,0deg);
+		-webkit-transform: translate(-20px,0px) scale(1,1) rotate(2deg) skew(0deg,0deg);
 		opacity: 1.0;
 	} 87.5% {
 		-webkit-animation-timing-function: linear;
-		-webkit-transform: translate(-30px,0px) scale(1,1) rotate(-2deg) skew(0deg,0deg);
+		-webkit-transform: translate(20px,0px) scale(1,1) rotate(-2deg) skew(0deg,0deg);
 		opacity: 1.0;
 	}
 }
@@ -53,19 +53,19 @@
 		opacity: 1.0;
 	} 12.5% {
 		animation-timing-function: linear;
-		transform: translate(-40px,0px) scale(1,1) rotate(2deg) skew(0deg,0deg);
+		transform: translate(-20px,0px) scale(1,1) rotate(2deg) skew(0deg,0deg);
 		opacity: 1.0;
 	} 37.5% {
 		animation-timing-function: linear;
-		transform: translate(40px,0px) scale(1,1) rotate(-2deg) skew(0deg,0deg);
+		transform: translate(20px,0px) scale(1,1) rotate(-2deg) skew(0deg,0deg);
 		opacity: 1.0;
 	} 62.5% {
 		animation-timing-function: linear;
-		transform: translate(-30px,0px) scale(1,1) rotate(2deg) skew(0deg,0deg);
+		transform: translate(-20px,0px) scale(1,1) rotate(2deg) skew(0deg,0deg);
 		opacity: 1.0;
 	} 87.5% {
 		animation-timing-function: linear;
-		transform: translate(-30px,0px) scale(1,1) rotate(-2deg) skew(0deg,0deg);
+		transform: translate(20px,0px) scale(1,1) rotate(-2deg) skew(0deg,0deg);
 		opacity: 1.0;
 	}
 }
