@@ -3,14 +3,15 @@
 }
 
 .animated {
-	-webkit-animation-duration: 1.5s;
-	animation-duration: 1.5s;
+	-webkit-animation-duration: .4s;
+	animation-duration: .4s;
 	-webkit-animation-fill-mode: both;
 	animation-fill-mode: both;
 	-webkit-animation-iteration-count: 1;
 	animation-iteration-count: 1;
 	-webkit-animation-delay: 1.6s;
 	animation-delay: 1.6s;
+	animation-iteration-count: 4;
 }
 
 @-webkit-keyframes shrine {
@@ -19,30 +20,26 @@
 		-webkit-transform: translate(0px,0px) scale(1,1) rotate(0deg) skew(0deg,0deg);
 		opacity: 1.0;
 	} to {
-		-webkit-animation-timing-function: ease-out;
+		-webkit-animation-timing-function: linear;
 		-webkit-transform: translate(0px,0px) scale(1,1) rotate(0deg) skew(0deg,0deg);
 		opacity: 1.0;
-	} 15% {
+	} 12.5% {
 		-webkit-animation-timing-function: linear;
-		-webkit-transform: translate(-40px,0px) scale(1,1) rotate(5deg) skew(0deg,0deg);
+		-webkit-transform: translate(-40px,0px) scale(1,1) rotate(2deg) skew(0deg,0deg);
 		opacity: 1.0;
-	} 26% {
+	} 37.5% {
 		-webkit-animation-timing-function: linear;
-		-webkit-transform: translate(40px,0px) scale(1,1) rotate(-5deg) skew(0deg,0deg);
+		-webkit-transform: translate(40px,0px) scale(1,1) rotate(-2deg) skew(0deg,0deg);
 		opacity: 1.0;
-	} 37% {
+	} 62.5% {
 		-webkit-animation-timing-function: linear;
-		-webkit-transform: translate(-30px,0px) scale(1,1) rotate(5deg) skew(0deg,0deg);
+		-webkit-transform: translate(-30px,0px) scale(1,1) rotate(2deg) skew(0deg,0deg);
 		opacity: 1.0;
-	} 52% {
+	} 87.5% {
 		-webkit-animation-timing-function: linear;
-		-webkit-transform: translate(30px,0px) scale(1,1) rotate(-5deg) skew(0deg,0deg);
+		-webkit-transform: translate(-30px,0px) scale(1,1) rotate(-2deg) skew(0deg,0deg);
 		opacity: 1.0;
-	} 68% {
-		-webkit-animation-timing-function: ease-out;
-		-webkit-transform: translate(-30px,0px) scale(1,1) rotate(5deg) skew(0deg,0deg);
-		opacity: 1.0;
-	} 
+	}
 }
 
 @keyframes shrine {
@@ -51,30 +48,26 @@
 		transform: translate(0px,0px) scale(1,1) rotate(0deg) skew(0deg,0deg);
 		opacity: 1.0;
 	} to {
-		animation-timing-function: ease-out;
+		animation-timing-function: linear;
 		transform: translate(0px,0px) scale(1,1) rotate(0deg) skew(0deg,0deg);
 		opacity: 1.0;
-	} 15% {
+	} 12.5% {
 		animation-timing-function: linear;
-		transform: translate(-40px,0px) scale(1,1) rotate(5deg) skew(0deg,0deg);
+		transform: translate(-40px,0px) scale(1,1) rotate(2deg) skew(0deg,0deg);
 		opacity: 1.0;
-	} 26% {
+	} 37.5% {
 		animation-timing-function: linear;
-		transform: translate(40px,0px) scale(1,1) rotate(-5deg) skew(0deg,0deg);
+		transform: translate(40px,0px) scale(1,1) rotate(-2deg) skew(0deg,0deg);
 		opacity: 1.0;
-	} 37% {
+	} 62.5% {
 		animation-timing-function: linear;
-		transform: translate(-30px,0px) scale(1,1) rotate(5deg) skew(0deg,0deg);
+		transform: translate(-30px,0px) scale(1,1) rotate(2deg) skew(0deg,0deg);
 		opacity: 1.0;
-	} 52% {
+	} 87.5% {
 		animation-timing-function: linear;
-		transform: translate(30px,0px) scale(1,1) rotate(-5deg) skew(0deg,0deg);
+		transform: translate(-30px,0px) scale(1,1) rotate(-2deg) skew(0deg,0deg);
 		opacity: 1.0;
-	} 68% {
-		animation-timing-function: ease-out;
-		transform: translate(-30px,0px) scale(1,1) rotate(5deg) skew(0deg,0deg);
-		opacity: 1.0;
-	} 
+	}
 }
 
 .shrine {
@@ -108,10 +101,10 @@
 
 @keyframes result {
 	from {
-		animation-timing-function: linear;
+		transform: scale(2,2);
 		opacity: 0;
 	} to {
-		animation-timing-function: linear;
+		transform: scale(1,1);
 		opacity: 1;
 	}
 }
@@ -125,6 +118,7 @@
 	animation-name: result;
 	-webkit-transform-origin: center center;
 	transform-origin: center center;
+	animation-timing-function: cubic-bezier(1,.03,1,.32);
 }
 
 .open-button {
