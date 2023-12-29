@@ -10,7 +10,7 @@ import useSound from 'use-sound'
 const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
-  var transport: Transport = createConnectTransport({baseUrl: 'http://localhost:3090'})
+  var transport: Transport = createConnectTransport({baseUrl: 'http://os3-328-53953.vs.sakura.ne.jp:3090'})
   var connectClient: PromiseClient<typeof OmikujiService> = createPromiseClient(OmikujiService, transport)
 
   function ResultLevelToKanji(level: OmikujiResponse_ResultLevel): string {

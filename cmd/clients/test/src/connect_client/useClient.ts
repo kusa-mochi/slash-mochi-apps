@@ -4,7 +4,7 @@ import { createConnectTransport } from "@connectrpc/connect-web";
 import { createPromiseClient, PromiseClient } from "@connectrpc/connect";
 
 const transport = createConnectTransport({
-  baseUrl: "http://localhost:3090",
+  baseUrl: "http://os3-328-53953.vs.sakura.ne.jp:3090",
 });
 
 /**
