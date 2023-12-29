@@ -1,0 +1,12 @@
+{
+    "name": "slash_mochi_apps",
+    "dockerComposeFile": ["./docker-compose.editor.yml"],
+    "service": "node-go-editor",
+    "customizations": {
+        "vscode": {
+            "settings": {
+                "remoe.autoForwardPorts": false
+            }
+        }
+    }
+}

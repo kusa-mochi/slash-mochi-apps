@@ -1,0 +1,21 @@
+version: "3.8"
+services:
+  node-go-editor:
+    image: whoatemyapplepie/slash-mochi-buf-builder:0.1.0
+    build:
+      context: buf_builder
+      args:
+        - GO_VERSION=${GO_VERSION}
+        - GO_BUILDER_OS=${GO_BUILDER_OS}
+        - GO_BUILDER_ARCH=${GO_BUILDER_ARCH}
+        - NODE_VERSION=${NODE_VERSION}
+        - NODE_BUILDER_OS=${NODE_BUILDER_OS}
+        - NODE_BUILDER_ARCH=${NODE_BUILDER_ARCH}
+    ports:
+      - 4000:3000
+      - 4080:3080
+      - 4090:3090
+    volumes:
+      - ../:/project
+    working_dir: /project
+    tty: true

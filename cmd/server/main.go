@@ -2,19 +2,86 @@ package main
 
 import (
 	"context"
-	"flag"
+	"encoding/json"
 	"fmt"
 	"io"
 	"log"
 	"net/http"
 	"os"
+	"slash_mochi/cmd/server/config"
+	omikuji_service "slash_mochi/cmd/server/omikuji"
 	test_service "slash_mochi/cmd/server/test"
+	"slash_mochi/gen/go/slash_mochi/v1/omikuji/omikujiv1connect"
 	"slash_mochi/gen/go/slash_mochi/v1/test/testv1connect"
 
 	"connectrpc.com/connect"
 	"connectrpc.com/grpcreflect"
 	"github.com/rs/cors"
 )
+
+// func webServerRoutine(ip string, port int, dirPath string) {
+
+// 	// // debug -->
+// 	// log.Println(dirPath)
+// 	// log.Printf("%#v",
+// 	// 	http.FileServer(
+// 	// 		http.Dir(dirPath),
+// 	// 	),
+// 	// )
+// 	// log.Printf("%#v",
+// 	// 	http.StripPrefix(
+// 	// 		"/",
+// 	// 		http.FileServer(
+// 	// 			http.Dir(dirPath),
+// 	// 		),
+// 	// 	),
+// 	// )
+// 	// // <-- debug
+
+// 	http.Handle(
+// 		"/",
+// 		http.StripPrefix(
+// 			"/",
+// 			http.FileServer(
+// 				http.Dir(dirPath),
+// 			),
+// 		),
+// 	)
+// 	log.Println("listening requests to the web server...")
+// 	log.Fatal(
+// 		http.ListenAndServe(
+// 			fmt.Sprintf("%s:%v", ip, port),
+// 			nil,
+// 		),
+// 	)
+// }
+
+func connectServerRoutine(ip string, port int) {
+	mux := newServeMuxWithReflection()
+	interceptor := newInterCeptors()
+
+	// test service
+	testService := test_service.NewTestService()
+	testPath, testHandler := testv1connect.NewTestServiceHandler(testService, interceptor)
+	mux.Handle(testPath, testHandler)
+
+	// omikuji service
+	omikujiService := omikuji_service.NewOmikujiService()
+	omikujiPath, omikujiHandler := omikujiv1connect.NewOmikujiServiceHandler(omikujiService, interceptor)
+	mux.Handle(omikujiPath, omikujiHandler)
+
+	// TODO: make CORS rules.
+	c := cors.AllowAll()
+	corsHandler := c.Handler(mux)
+
+	log.Println("listening requests to the connect server...")
+	log.Fatal(
+		http.ListenAndServe(
+			fmt.Sprintf("%s:%v", ip, port),
+			corsHandler,
+		),
+	)
+}
 
 func newServeMuxWithReflection() *http.ServeMux {
 	mux := http.NewServeMux()
@@ -48,17 +115,23 @@ func newInterCeptors() connect.Option {
 }
 
 func main() {
-	// get args
-	var (
-		ipAddr            = flag.String("IpAddr", "127.0.0.1", "Server IP Addr (default=\"127.0.0.1\")")
-		connectServerPort = flag.Int("ConnectServerPort", 3081, "Connect server port number (default=3081)")
-		logPath           = flag.String("LogPath", "./log.txt", "log file path (default=\"./log.txt\")")
+	const (
+		CONFIG_FILE_PATH string = "./config.json"
 	)
-	flag.Parse()
+
+	rawConfig, err := os.ReadFile(CONFIG_FILE_PATH)
+	if err != nil {
+		log.Fatal(err)
+	}
+	var config config.Config
+	err = json.Unmarshal(rawConfig, &config)
+	if err != nil {
+		log.Fatal(err)
+	}
 
 	// initialize logger
 	logFile, err := os.OpenFile(
-		*logPath,
+		fmt.Sprintf("%s%s", config.Log.Dir, config.Log.FileName),
 		os.O_APPEND|os.O_CREATE|os.O_WRONLY,
 		0644,
 	)
@@ -68,22 +141,18 @@ func main() {
 	defer logFile.Close()
 	log.SetOutput(io.MultiWriter(os.Stdout, logFile))
 
-	mux := newServeMuxWithReflection()
-	interceptor := newInterCeptors()
-	testService := test_service.NewTestService()
-	testPath, testHandler := testv1connect.NewTestServiceHandler(testService, interceptor)
-	mux.Handle(testPath, testHandler)
+	log.Println("initializing...")
 
-	// TODO: make CORS rules.
-	c := cors.AllowAll()
-	corsHandler := c.Handler(mux)
+	// // start the web server
+	// go webServerRoutine(
+	// 	config.WebServer.Ip,
+	// 	config.WebServer.Port,
+	// 	config.WebServer.Dir,
+	// )
 
-	log.Println("listening...")
-
-	log.Fatal(
-		http.ListenAndServe(
-			fmt.Sprintf("%s:%v", *ipAddr, *connectServerPort),
-			corsHandler,
-		),
+	// start the connect server using main Go routine
+	connectServerRoutine(
+		config.ConnectServer.Ip,
+		config.ConnectServer.Port,
 	)
 }

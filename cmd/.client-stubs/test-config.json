@@ -1,0 +1,6 @@
+{
+    "target": {
+        "ip": "localhost",
+        "port": 3090
+    }
+}
