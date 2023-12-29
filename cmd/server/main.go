@@ -19,42 +19,42 @@ import (
 	"github.com/rs/cors"
 )
 
-func webServerRoutine(ip string, port int, dirPath string) {
+// func webServerRoutine(ip string, port int, dirPath string) {
 
-	// // debug -->
-	// log.Println(dirPath)
-	// log.Printf("%#v",
-	// 	http.FileServer(
-	// 		http.Dir(dirPath),
-	// 	),
-	// )
-	// log.Printf("%#v",
-	// 	http.StripPrefix(
-	// 		"/",
-	// 		http.FileServer(
-	// 			http.Dir(dirPath),
-	// 		),
-	// 	),
-	// )
-	// // <-- debug
+// 	// // debug -->
+// 	// log.Println(dirPath)
+// 	// log.Printf("%#v",
+// 	// 	http.FileServer(
+// 	// 		http.Dir(dirPath),
+// 	// 	),
+// 	// )
+// 	// log.Printf("%#v",
+// 	// 	http.StripPrefix(
+// 	// 		"/",
+// 	// 		http.FileServer(
+// 	// 			http.Dir(dirPath),
+// 	// 		),
+// 	// 	),
+// 	// )
+// 	// // <-- debug
 
-	http.Handle(
-		"/",
-		http.StripPrefix(
-			"/",
-			http.FileServer(
-				http.Dir(dirPath),
-			),
-		),
-	)
-	log.Println("listening requests to the web server...")
-	log.Fatal(
-		http.ListenAndServe(
-			fmt.Sprintf("%s:%v", ip, port),
-			nil,
-		),
-	)
-}
+// 	http.Handle(
+// 		"/",
+// 		http.StripPrefix(
+// 			"/",
+// 			http.FileServer(
+// 				http.Dir(dirPath),
+// 			),
+// 		),
+// 	)
+// 	log.Println("listening requests to the web server...")
+// 	log.Fatal(
+// 		http.ListenAndServe(
+// 			fmt.Sprintf("%s:%v", ip, port),
+// 			nil,
+// 		),
+// 	)
+// }
 
 func connectServerRoutine(ip string, port int) {
 	mux := newServeMuxWithReflection()
@@ -143,12 +143,12 @@ func main() {
 
 	log.Println("initializing...")
 
-	// start the web server
-	go webServerRoutine(
-		config.WebServer.Ip,
-		config.WebServer.Port,
-		config.WebServer.Dir,
-	)
+	// // start the web server
+	// go webServerRoutine(
+	// 	config.WebServer.Ip,
+	// 	config.WebServer.Port,
+	// 	config.WebServer.Dir,
+	// )
 
 	// start the connect server using main Go routine
 	connectServerRoutine(
