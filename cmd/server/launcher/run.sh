@@ -2,13 +2,6 @@
 
 # run this script as super user.
 
-LOG_DIR=/var/slash-mochi
-LOG_FILENAME=log.txt
-
-if [ -d $LOG_DIR ]; then
-    rm -rf $LOG_DIR
-fi
-mkdir -p $LOG_DIR
-
+cd /mochi/server
 chmod +x ./slash_mochi_server
-./slash_mochi_server -LogPath ${LOG_DIR}${LOG_FILENAME}
+./slash_mochi_server

@@ -110,7 +110,9 @@ services:
         mkdir -p /project/dist/${GO_TARGET_OS}/${GO_TARGET_ARCH}/server &&
         mkdir -p /project/dist/${GO_TARGET_OS}/${GO_TARGET_ARCH}/clients/test &&
         mkdir -p /project/dist/${GO_TARGET_OS}/${GO_TARGET_ARCH}/clients/omikuji &&
-        cp /project/cmd/server/${SERVER_PROGRAM_NAME}${SERVER_PROGRAM_EXT} /project/dist/${GO_TARGET_OS}/${GO_TARGET_ARCH}/server &&
-        cp /project/cmd/server/config.json /project/dist/${GO_TARGET_OS}/${GO_TARGET_ARCH}/server &&
-        cp -r /project/cmd/clients/test/out/* /project/dist/${GO_TARGET_OS}/${GO_TARGET_ARCH}/clients/test &&
-        cp -r /project/cmd/clients/omikuji/out/* /project/dist/${GO_TARGET_OS}/${GO_TARGET_ARCH}/clients/omikuji'
+        cp -f /project/cmd/server/${SERVER_PROGRAM_NAME}${SERVER_PROGRAM_EXT} /project/dist/${GO_TARGET_OS}/${GO_TARGET_ARCH}/server &&
+        cp -f /project/cmd/server/config.json /project/dist/${GO_TARGET_OS}/${GO_TARGET_ARCH}/server &&
+        cp -f /project/cmd/server/launcher/run.sh /project/dist/${GO_TARGET_OS}/${GO_TARGET_ARCH}/server &&
+        cp -f /project/cmd/server/launcher/slash-mochi-app.service /project/dist/${GO_TARGET_OS}/${GO_TARGET_ARCH}/server &&
+        cp -rf /project/cmd/clients/test/out/* /project/dist/${GO_TARGET_OS}/${GO_TARGET_ARCH}/clients/test &&
+        cp -rf /project/cmd/clients/omikuji/out/* /project/dist/${GO_TARGET_OS}/${GO_TARGET_ARCH}/clients/omikuji'

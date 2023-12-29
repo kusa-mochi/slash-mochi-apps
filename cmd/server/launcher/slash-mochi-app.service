@@ -1,0 +1,14 @@
+[Unit]
+Description=SlashMochiApp
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+Type=simple
+WorkingDirectory=/mochi/server
+ExecStart=bash /mochi/server/run.sh
+Restart=no
+User=debian
+
+[Install]
+WantedBy=multi-user.target
