@@ -1,0 +1,38 @@
+@startuml login
+
+actor user
+box client
+    participant "client program" as client
+    database cookie
+end box
+
+box server
+    participant "server program" as server
+    database store
+end box
+
+user ->> client : open the game
+client -> cookie : get a token
+cookie --> client : token / undefined
+
+alt token is defined in the cookie
+    client -> server : validate a token
+    server -> store : check existence of a token
+    store --> server : check result
+    server --> client : validation result
+end
+
+alt token is undefined / incorrect
+    client -> client : delete a token in the cookie
+    client -> client : show [name config] page
+    user ->> client : input name
+    client -> client : generate a token
+    client -> cookie : save a token
+    cookie --> client
+end
+client -> client : show [rooms] page
+client -> server : subscribe a server stream\nfor the global chat
+server -> server : create a server stream
+server --> client : stream for the global chat
+
+@enduml
