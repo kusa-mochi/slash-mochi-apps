@@ -26,7 +26,11 @@ alt token is undefined / incorrect
     client -> client : delete a token in the cookie
     client -> client : show [name config] page
     user ->> client : input name
-    client -> client : generate a token
+    client -> server : generate a token
+    server -> server : generate a token
+    server -> store : save a token
+    store --> server
+    server --> client : token
     client -> cookie : save a token
     cookie --> client
 end
