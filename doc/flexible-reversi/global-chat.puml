@@ -3,6 +3,7 @@
 actor user
 box client
     participant "client program" as client
+    database cookie
 end box
 box other clients
     participant "client program" as other_clients
@@ -14,6 +15,8 @@ box server
 end box
 
 user ->> client : input a message
+client -> cookie : get a token
+cookie --> client : token / undefined
 client -> server : chat sending request
 server -> store : put a log
 store --> server
