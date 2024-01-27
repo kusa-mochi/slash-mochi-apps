@@ -1,0 +1,44 @@
+@startuml enter-a-room
+
+actor user
+actor "another user" as another_user
+box client
+    participant "client program" as client
+    database cookie
+end box
+box another client
+    participant "client program" as another_client
+    database "cookie" as another_cookie
+end box
+
+box server
+    participant "server program" as server
+    database store
+end box
+
+client -> client : show [game] page
+client -> server : subscribe [room state]
+server --> client : [room state] server stream
+another_client -> another_client : show [rooms] page
+ref over another_client, store : create streams (login.puml)
+another_user ->> another_client : push [enter a room] button
+
+another_client -> another_cookie : get a token
+another_cookie --> another_client : token / undefined
+another_client -> server : entering room request
+server -> store : put a log
+store --> server
+server -> store : check existence of a token
+store --> server : check result
+alt token is correct
+    server --> another_client : room params
+    another_client -> another_client : show [game] page
+    another_client -> server : subscribe [room state]
+    server --> another_client : [room state] server stream
+    server ->> client : push a notification\nusing a [room state] server stream
+    client -> client : update [game] page
+else token is incorrect
+    server --> another_client : error
+end
+
+@enduml
