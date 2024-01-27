@@ -1,0 +1,47 @@
+@startuml make-a-room
+
+actor user
+box client
+    participant "client program" as client
+    database cookie
+end box
+box other clients
+    participant "client program" as other_clients
+end box
+
+box server
+    participant "server program" as server
+    database store
+end box
+
+== [rooms] page ==
+
+user ->> client : push [make a room] button
+client -> client : show [making room modal]
+user ->> client : input name of a room
+user ->> client : select a stage
+user ->> client : register password (optional)
+user ->> client : push [make] button
+client -> client : close [making room modal]
+
+client -> cookie : get a token
+cookie --> client : token / undefined
+client -> server : making room request
+server -> store : put a log
+store --> server
+server -> store : check existence of a token
+store --> server : check result
+alt token is correct
+    server -> store : create a new room instance
+    store --> server
+    server --> client
+    server ->> client : push new room list\nusing a server stream
+    client -> client : update [rooms] page
+    server ->> other_clients : push new room list\nusing a server stream
+    other_clients -> other_clients : update [rooms] page
+    client -> client : show [game] page
+else token is incorrect
+    server --> client : error
+end
+
+@enduml

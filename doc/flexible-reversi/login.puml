@@ -35,8 +35,13 @@ alt token is undefined / incorrect
     cookie --> client
 end
 client -> client : show [rooms] page
+
 client -> server : subscribe a server stream\nfor the global chat
 server -> server : create a server stream
 server --> client : stream for the global chat
+
+client -> server : subscribe a server stream\nfor the room list
+server -> server : create a server stream
+server --> client : stream for the room list
 
 @enduml
