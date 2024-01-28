@@ -12,15 +12,16 @@ box server
 end box
 
 user ->> client : open the game
-client -> cookie : get a token
-cookie --> client : token / undefined
+' client -> cookie : get a token
+' cookie --> client : token / undefined
 
-alt token is defined in the cookie
-    client -> server : validate a token
-    server -> store : check existence of a token
-    store --> server : check result
-    server --> client : validation result
-end
+' alt token is defined in the cookie
+'     client -> server : validate a token
+'     server -> store : check existence of a token
+'     store --> server : check result
+'     server --> client : validation result
+' end
+ref over client, store : verify a token (verify-a-token.puml)\nwith no request
 
 alt token is undefined / incorrect
     client -> client : delete a token in the cookie

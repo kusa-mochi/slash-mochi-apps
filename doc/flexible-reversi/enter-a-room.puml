@@ -22,13 +22,14 @@ another_client -> another_client : show [rooms] page
 ref over another_client, store : create streams (login.puml)
 another_user ->> another_client : push [enter a room] button
 
-another_client -> another_cookie : get a token
-another_cookie --> another_client : token / undefined
-another_client -> server : entering room request
-server -> store : put a log
-store --> server
-server -> store : check existence of a token
-store --> server : check result
+' another_client -> another_cookie : get a token
+' another_cookie --> another_client : token / undefined
+' another_client -> server : entering room request
+' server -> store : put a log
+' store --> server
+' server -> store : check existence of a token
+' store --> server : check result
+ref over another_client, store : verify a token (verify-a-token.puml)\nto request to enter the room
 alt token is correct
     server --> another_client : room params
     another_client -> another_client : show [game] page

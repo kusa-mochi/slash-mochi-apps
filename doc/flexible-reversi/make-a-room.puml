@@ -24,13 +24,14 @@ user ->> client : register password (optional)
 user ->> client : push [make] button
 client -> client : close [making room modal]
 
-client -> cookie : get a token
-cookie --> client : token / undefined
-client -> server : making room request
-server -> store : put a log
-store --> server
-server -> store : check existence of a token
-store --> server : check result
+' client -> cookie : get a token
+' cookie --> client : token / undefined
+' client -> server : making room request
+' server -> store : put a log
+' store --> server
+' server -> store : check existence of a token
+' store --> server : check result
+ref over client, store : verify a token (verify-a-token.puml)\nto request to make a room
 alt token is correct
     server -> store : create a new room instance
     store --> server

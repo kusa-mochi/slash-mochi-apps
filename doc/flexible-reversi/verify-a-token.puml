@@ -1,0 +1,22 @@
+@startuml verify-a-token
+
+box client
+    participant "client program" as client
+    database cookie
+end box
+
+box server
+    participant "server program" as server
+    database store
+end box
+
+client -> cookie : get a token
+cookie --> client : token / undefined
+client -> server : request something
+server -> store : put a log
+store --> server
+server -> store : check existence of a token
+store --> server : check result
+server --> client : response / error
+
+@enduml
