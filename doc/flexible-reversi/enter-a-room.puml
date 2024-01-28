@@ -1,6 +1,5 @@
 @startuml enter-a-room
 
-actor user
 actor "another user" as another_user
 box client
     participant "client program" as client
