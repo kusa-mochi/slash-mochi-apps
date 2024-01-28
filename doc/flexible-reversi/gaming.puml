@@ -1,0 +1,65 @@
+@startuml gaming
+
+actor user
+box client
+    participant "client program" as client
+    database cookie
+end box
+
+box server
+    participant "server program" as server
+    database store
+end box
+
+box client
+    participant "client program" as another_client
+    database "cookie" as another_cookie
+end box
+actor "user" as another_user
+
+== start a game ==
+server -> store : change room state to "gaming"
+store --> server
+server ->> client : notify room state
+client -> client : update [game] page
+server ->> another_client : notify room state
+another_client -> another_client : update [game] page
+
+== play a turn ==
+user ->> client : action in a game
+ref over client, store : verify a token (verify-a-token.puml)\nto request an action
+server -> server : do action
+server -> store : store a room state
+store --> server
+server ->> client : notify a room state
+client -> client : update [game] page
+server ->> another_client : notify a room state
+another_client -> another_client : update [game] page
+
+== chat in a room ==
+user ->> client : input a chat message
+ref over client, store : verify a token (verify-a-token.puml)\nto request to send a chat in a room
+server -> store : store a chat log
+store --> server
+server ->> client : notify a chat message
+client -> client : update [chat in romm]
+server ->> another_client : notify a chat message
+another_client -> another_client : update [chat in room]
+
+== end a game ==
+server -> server : do action
+server -> store : delete a room state
+store --> server
+server ->> client : notify a room state
+client -> client : update [game] page
+server ->> another_client : notify a room state
+another_client -> another_client : update [game] page
+user ->> client : push [exit] button
+client -> client : show [rooms] page
+another_user ->> another_client : push [exit] button
+another_client -> another_client : show [rooms] page
+
+== exit a room during a game ==
+== timeout ==
+
+@enduml
