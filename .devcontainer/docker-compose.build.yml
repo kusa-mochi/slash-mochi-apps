@@ -24,10 +24,13 @@ services:
         buf generate --timeout 0s &&
         rm -rf /project/cmd/clients/test/src/connect &&
         rm -rf /project/cmd/clients/omikuji/connect &&
+        rm -rf /project/cmd/clients/flexible-reversi/connect &&
         mkdir -p /project/cmd/clients/test/src/connect &&
         mkdir -p /project/cmd/clients/omikuji/connect &&
+        mkdir -p /project/cmd/clients/flexible-reversi/connect &&
         cp -r /project/gen/es/slash_mochi/v1/test/* /project/cmd/clients/test/src/connect/ &&
-        cp -r /project/gen/es/slash_mochi/v1/omikuji/* /project/cmd/clients/omikuji/connect/'
+        cp -r /project/gen/es/slash_mochi/v1/omikuji/* /project/cmd/clients/omikuji/connect/ &&
+        cp -r /project/gen/es/slash_mochi/v1/flexible_reversi/* /project/cmd/clients/flexible-reversi/connect/'
     
   server-builder:
     image: whoatemyapplepie/slash-mochi-go-builder:0.1.0

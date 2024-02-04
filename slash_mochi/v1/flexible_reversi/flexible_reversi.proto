@@ -5,10 +5,18 @@ option go_package = "slash_mochi/gen/go/slash_mochi/v1/flexible_reversi;flexible
 import "google/protobuf/empty.proto";
 
 service FlexibleReversiService {
-    rpc SubscribeRoomList(Empty) returns (stream RoomList);
-    rpc GlobalChat(stream )
+    rpc SubscribeRoomList(google.protobuf.Empty) returns (stream RoomList);
+    rpc GlobalChat(stream ChatToSend) returns(stream ChatToReceive);
 }
 
 message RoomList {
+    repeated int32 Id = 1;
+}
 
+message ChatToSend {
+    string message = 1;
+}
+
+message ChatToReceive {
+    string message = 1;
 }
