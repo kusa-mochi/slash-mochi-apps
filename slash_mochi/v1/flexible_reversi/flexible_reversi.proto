@@ -1,0 +1,14 @@
+syntax = "proto3";
+package flexible_reversi.v1;
+option go_package = "slash_mochi/gen/go/slash_mochi/v1/flexible_reversi;flexible_reversiv1";
+
+import "google/protobuf/empty.proto";
+
+service FlexibleReversiService {
+    rpc SubscribeRoomList(Empty) returns (stream RoomList);
+    rpc GlobalChat(stream )
+}
+
+message RoomList {
+
+}
