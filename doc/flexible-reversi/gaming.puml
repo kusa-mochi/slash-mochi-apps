@@ -54,6 +54,8 @@ server ->> another_client : notify a room state
 another_client -> another_client : update [game] page
 server -> store : delete a room state
 store --> server
+server ->> client : push new room list\nusing a server stream
+server ->> another_client : push new room list\nusing a server stream
 user ->> client : push [exit] button
 client -> client : show [rooms] page
 another_user ->> another_client : push [exit] button
@@ -65,7 +67,11 @@ client -> server : notify exit
 server --> client
 client -> client : show [rooms] page
 server ->> another_client : notify a room state\n"your opponent has exited"
-server -> server : delete a room state
+server -> store : delete a room state
+store --> server
+server ->> client : push new room list\nusing a server stream
+client -> client : update [rooms] page
+server ->> another_client : push new room list\nusing a server stream
 another_client -> another_client : update [game] page
 another_user ->> another_client : push [exit] button
 another_client -> another_client : show [rooms] page
@@ -83,6 +89,11 @@ alt at regular time intervals
         server ->> client : notify a room state\n"this room is now closing because of timeout"
         note right of client : no response\nbecause of inactive
         server ->> another_client : notify a room state\n"this room is now closing because of timeout"
+        server -> store : delete a room state
+        store --> server
+        server ->> client : push new room list\nusing a server stream
+        client -> client : update [rooms] page
+        server ->> another_client : push new room list\nusing a server stream
         another_client -> another_client : update [game] page
         another_user ->> another_client : push [exit] button
         another_client -> another_client : show [rooms] page
