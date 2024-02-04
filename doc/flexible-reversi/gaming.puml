@@ -11,7 +11,7 @@ box server
     database store
 end box
 
-box client
+box another_client
     participant "client program" as another_client
     database "cookie" as another_cookie
 end box
@@ -48,18 +48,45 @@ another_client -> another_client : update [chat in room]
 
 == end a game ==
 server -> server : do action
-server -> store : delete a room state
-store --> server
 server ->> client : notify a room state
 client -> client : update [game] page
 server ->> another_client : notify a room state
 another_client -> another_client : update [game] page
+server -> store : delete a room state
+store --> server
 user ->> client : push [exit] button
 client -> client : show [rooms] page
 another_user ->> another_client : push [exit] button
 another_client -> another_client : show [rooms] page
 
 == exit a room during a game ==
+user ->> client : push [exit] button
+client -> server : notify exit
+server --> client
+client -> client : show [rooms] page
+server ->> another_client : notify a room state\n"your opponent has exited"
+server -> server : delete a room state
+another_client -> another_client : update [game] page
+another_user ->> another_client : push [exit] button
+another_client -> another_client : show [rooms] page
+
 == timeout ==
+alt at regular time intervals
+    server ->> client : heart beat
+    server -> server : start a timer for client
+    server ->> another_client : heart beat
+    server -> server : start a timer for another_client
+    alt client is active
+        client -> server : heart beat response
+        server --> client
+    else timeout for a response
+        server ->> client : notify a room state\n"this room is now closing because of timeout"
+        note right of client : no response\nbecause of inactive
+        server ->> another_client : notify a room state\n"this room is now closing because of timeout"
+        another_client -> another_client : update [game] page
+        another_user ->> another_client : push [exit] button
+        another_client -> another_client : show [rooms] page
+    end
+end
 
 @enduml
