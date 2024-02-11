@@ -92,6 +92,16 @@ services:
         cd cmd/clients/omikuji &&
         npm i &&
         npm run build'
+  
+  # flexible-reversi-client-builder:
+  #   image: whoatemyapplepie/slash-mochi-node-builder:0.1.0
+  #   depends_on:
+  #     buf-builder:
+  #       condition: service_completed_successfully
+  #   build:
+  #     context: node_builder
+  #     args:
+      
 
   dist-builder:
     image: whoatemyapplepie/slash-mochi-dist-builder:0.1.0
