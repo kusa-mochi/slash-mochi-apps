@@ -9,8 +9,11 @@ import (
 	"net/http"
 	"os"
 	"slash_mochi/cmd/server/config"
-	omikuji_service "slash_mochi/cmd/server/omikuji"
-	test_service "slash_mochi/cmd/server/test"
+	flexible_reversi_servce "slash_mochi/cmd/server/connect-apis/flexible-reversi"
+	omikuji_service "slash_mochi/cmd/server/connect-apis/omikuji"
+	test_service "slash_mochi/cmd/server/connect-apis/test"
+	flexible_reversi_store "slash_mochi/cmd/server/store/flexible-reversi"
+	"slash_mochi/gen/go/slash_mochi/v1/flexible_reversi/flexible_reversiv1connect"
 	"slash_mochi/gen/go/slash_mochi/v1/omikuji/omikujiv1connect"
 	"slash_mochi/gen/go/slash_mochi/v1/test/testv1connect"
 
@@ -56,7 +59,11 @@ import (
 // 	)
 // }
 
-func connectServerRoutine(ip string, port int) {
+func connectServerRoutine(
+	ip string,
+	port int,
+	flexibleReversiStoreInterface *flexible_reversi_store.FlexibleReversiStoreInterfaces,
+) {
 	mux := newServeMuxWithReflection()
 	interceptor := newInterCeptors()
 
@@ -69,6 +76,11 @@ func connectServerRoutine(ip string, port int) {
 	omikujiService := omikuji_service.NewOmikujiService()
 	omikujiPath, omikujiHandler := omikujiv1connect.NewOmikujiServiceHandler(omikujiService, interceptor)
 	mux.Handle(omikujiPath, omikujiHandler)
+
+	// flexible-reversi servce
+	flexibleReversiService := flexible_reversi_servce.NewFlexibleReversiService(flexibleReversiStoreInterface)
+	flexibleReversiPath, flexibleReversiHandler := flexible_reversiv1connect.NewFlexibleReversiServiceHandler(flexibleReversiService, interceptor)
+	mux.Handle(flexibleReversiPath, flexibleReversiHandler)
 
 	// TODO: make CORS rules.
 	c := cors.AllowAll()
@@ -150,9 +162,25 @@ func main() {
 	// 	config.WebServer.Dir,
 	// )
 
+	flexibleReversiStore := flexible_reversi_store.NewFlexibleReversiStore()
+
 	// start the connect server using main Go routine
-	connectServerRoutine(
+	go connectServerRoutine(
 		config.ConnectServer.Ip,
 		config.ConnectServer.Port,
+		flexibleReversiStore.Interfaces,
 	)
+
+	errorToBreak := false
+	for errorToBreak {
+		select {
+		// Flexible Reversi
+		case flexibleReversiValidateUserId := <-flexibleReversiStore.Interfaces.ValidateUserIdRequest:
+			flexibleReversiStore.Controllers.ValidateUserId(flexibleReversiValidateUserId)
+		case flexibleReversiGlobalChat := <-flexibleReversiStore.Interfaces.GlobalChatRequest:
+			flexibleReversiStore.Controllers.GlobalChat(flexibleReversiGlobalChat)
+		}
+	}
+
+	log.Println("fin server program")
 }
