@@ -10,13 +10,15 @@ service FlexibleReversiService {
 }
 
 message RoomList {
-    repeated int32 Id = 1;
+    repeated int32 id = 1;
 }
 
 message ChatToSend {
     string message = 1;
+    string user_id = 2;
 }
 
 message ChatToReceive {
     string message = 1;
+    string user_name = 2;
 }
