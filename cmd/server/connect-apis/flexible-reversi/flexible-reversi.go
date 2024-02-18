@@ -55,6 +55,17 @@ func (s *FlexibleReversiService) GlobalChat(
 		return connect.NewError(connect.CodeAborted, fmt.Errorf("invalid user ID"))
 	}
 
+	// add a stream to the stream map
+	addGlobalChatStreamResChan := make(chan bool)
+	s.storeInterface.AddGlobalChatStreamRequest <- &server_common.SetRequest[flexible_reversi_store.GlobalChatStreamItem]{
+		Data:    *flexible_reversi_store.NewGlobalChatStreamItem(userId, bs),
+		ResChan: addGlobalChatStreamResChan,
+	}
+	if isAdded := <-addGlobalChatStreamResChan; !isAdded {
+		log.Println("failed to add a stream to the store")
+		return connect.NewError(connect.CodeInternal, fmt.Errorf("failed to add a stream to the store. user ID=%s", userId))
+	}
+
 	for {
 		msg, err := bs.Receive()
 		if errors.Is(err, io.EOF) {
@@ -79,16 +90,31 @@ func (s *FlexibleReversiService) GlobalChat(
 			return connect.NewError(connect.CodeAborted, fmt.Errorf("user info not found"))
 		}
 
-		// TODO: send to ALL clients who connect to Flexible Reversi
-		if err := bs.Send(&flexible_reversiv1.ChatToReceive{
+		// send to ALL clients who connect to Flexible Reversi
+		if chatResult := s.BloadcastGlobalChat(&flexible_reversiv1.ChatToReceive{
 			Message:  newChatItem.Message,
 			UserName: newChatItem.UserName,
-		}); err != nil {
-			return connect.NewError(connect.CodeInternal, fmt.Errorf("failed to broadcast global chat:%w", err))
+		}); chatResult != nil {
+			log.Println("failed to send a global chat to someone")
 		}
 	}
 }
 
 /////////// private methods
 
-func (s *FlexibleReversiService) 
+func (s *FlexibleReversiService) BloadcastGlobalChat(chatData *flexible_reversiv1.ChatToReceive) error {
+	chatResultResChan := make(chan bool)
+
+	// send a chat to all clients who is connecting to this game.
+	s.storeInterface.BroadcastGlobalChatRequest <- &server_common.SetRequest[*flexible_reversiv1.ChatToReceive]{
+		Data:    chatData,
+		ResChan: chatResultResChan,
+	}
+
+	// if failed to send a chat to someone,
+	if chatResult := <-chatResultResChan; !chatResult {
+		return connect.NewError(connect.CodeUnknown, fmt.Errorf("failed to broadcast global chat"))
+	}
+
+	return nil
+}

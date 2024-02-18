@@ -171,10 +171,14 @@ func main() {
 		flexibleReversiStore.Interfaces,
 	)
 
-	errorToBreak := false
+	errorToBreak := true
 	for errorToBreak {
 		select {
 		// Flexible Reversi
+		case addGlobalChatStreamRequest := <-flexibleReversiStore.Interfaces.AddGlobalChatStreamRequest:
+			flexibleReversiStore.Controllers.AddGlobalChatStream(addGlobalChatStreamRequest)
+		case broadcastGlobalChat := <-flexibleReversiStore.Interfaces.BroadcastGlobalChatRequest:
+			flexibleReversiStore.Controllers.BroadcastGlobalChat(broadcastGlobalChat)
 		case flexibleReversiValidateUserId := <-flexibleReversiStore.Interfaces.ValidateUserIdRequest:
 			flexibleReversiStore.Controllers.ValidateUserId(flexibleReversiValidateUserId)
 		case flexibleReversiGlobalChat := <-flexibleReversiStore.Interfaces.GlobalChatRequest:

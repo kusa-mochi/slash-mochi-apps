@@ -1,4 +1,4 @@
-package flexible_reversi_servce
+package flexible_reversi_store
 
 import (
 	"fmt"
