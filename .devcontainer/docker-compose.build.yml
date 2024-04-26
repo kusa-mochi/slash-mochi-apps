@@ -24,10 +24,13 @@ services:
         buf generate --timeout 0s &&
         rm -rf /project/cmd/clients/test/src/connect &&
         rm -rf /project/cmd/clients/omikuji/connect &&
+        rm -rf /project/cmd/clients/flexible-reversi/connect &&
         mkdir -p /project/cmd/clients/test/src/connect &&
         mkdir -p /project/cmd/clients/omikuji/connect &&
+        mkdir -p /project/cmd/clients/flexible-reversi/connect &&
         cp -r /project/gen/es/slash_mochi/v1/test/* /project/cmd/clients/test/src/connect/ &&
-        cp -r /project/gen/es/slash_mochi/v1/omikuji/* /project/cmd/clients/omikuji/connect/'
+        cp -r /project/gen/es/slash_mochi/v1/omikuji/* /project/cmd/clients/omikuji/connect/ &&
+        cp -r /project/gen/es/slash_mochi/v1/flexible_reversi/* /project/cmd/clients/flexible-reversi/connect/'
     
   server-builder:
     image: whoatemyapplepie/slash-mochi-go-builder:0.1.0
@@ -89,6 +92,16 @@ services:
         cd cmd/clients/omikuji &&
         npm i &&
         npm run build'
+  
+  # flexible-reversi-client-builder:
+  #   image: whoatemyapplepie/slash-mochi-node-builder:0.1.0
+  #   depends_on:
+  #     buf-builder:
+  #       condition: service_completed_successfully
+  #   build:
+  #     context: node_builder
+  #     args:
+      
 
   dist-builder:
     image: whoatemyapplepie/slash-mochi-dist-builder:0.1.0

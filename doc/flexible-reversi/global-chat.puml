@@ -1,0 +1,36 @@
+@startuml global-chat
+
+actor user
+box client
+    participant "client program" as client
+    database cookie
+end box
+box other clients
+    participant "client program" as other_clients
+end box
+
+box server
+    participant "server program" as server
+    database store
+end box
+
+user ->> client : input a message
+' client -> cookie : get a token
+' cookie --> client : token / undefined
+' client -> server : chat sending request
+' server -> store : put a log
+' store --> server
+' server -> store : check existence of a token
+' store --> server : check result
+ref over client, store : verify a token (verify-a-token.puml)\nto request a chat sending
+alt token is correct
+    server --> client
+    server ->> client : push a message\nusing a server stream
+    client -> client : show a message
+    server ->> other_clients : push a message\nusing a server stream
+    other_clients -> other_clients : show a message
+else token is incorrect
+    server --> client : error
+end
+
+@enduml
