@@ -25,12 +25,15 @@ services:
         rm -rf /project/cmd/clients/test/src/connect &&
         rm -rf /project/cmd/clients/omikuji/connect &&
         rm -rf /project/cmd/clients/flexible-reversi/connect &&
+        rm -rf /project/cmd/clients/can-i-use-up-food/connect &&
         mkdir -p /project/cmd/clients/test/src/connect &&
         mkdir -p /project/cmd/clients/omikuji/connect &&
         mkdir -p /project/cmd/clients/flexible-reversi/connect &&
+        mkdir -p /project/cmd/clients/can-i-use-up-food/connect &&
         cp -r /project/gen/es/slash_mochi/v1/test/* /project/cmd/clients/test/src/connect/ &&
         cp -r /project/gen/es/slash_mochi/v1/omikuji/* /project/cmd/clients/omikuji/connect/ &&
-        cp -r /project/gen/es/slash_mochi/v1/flexible_reversi/* /project/cmd/clients/flexible-reversi/connect/'
+        cp -r /project/gen/es/slash_mochi/v1/flexible_reversi/* /project/cmd/clients/flexible-reversi/connect/ &&
+        cp -r /project/gen/es/slash_mochi/v1/can_i_use_up_food/* /project/cmd/clients/can-i-use-up-food/connect/'
     
   server-builder:
     image: whoatemyapplepie/slash-mochi-go-builder:0.1.0

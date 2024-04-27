@@ -1,0 +1,145 @@
+syntax = "proto3";
+package can_i_use_up_food.v1;
+option go_package = "slash_mochi/gen/go/slash_mochi/v1/can_i_use_up_food;can_i_use_up_foodv1";
+
+import "google/protobuf/empty.proto";
+
+service CanIUseUpFoodService {
+    rpc NewProject(NewProjectRequest) returns (ProjectUri);
+    rpc LoadProjectData(LoadProjectDataRequest) returns (ProjectData);
+    rpc AddFoodToList(AddFoodToListRequest) returns (FoodList);
+    rpc RemoveFoodsFromList(RemoveFoodsFromListRequest) returns (FoodList);
+    rpc ModifyFoodInList(ModifyFoodInListRequest) returns (FoodList);
+    rpc PutFoodToCalendar(PutFoodToCalendarRequest) returns (FoodList);
+    rpc RemoveFoodFromCalendar(RemoveFoodFromCalendarRequest) returns (FoodList);
+    rpc ModifyFoodAmountInCalendar(ModifyFoodAmountInCalendarRequest) returns (FoodList);
+    rpc MoveFoodInCalendar(MoveFoodInCalendarRequest) returns (FoodList);
+}
+
+//// message parts ////
+
+message Date {
+    int32 year = 1;
+    int32 month = 2;
+    int32 date = 3;
+}
+
+enum AmountUnit {
+    NONE = 0;
+    PIECES = 1;
+    MILLI_LITER = 2;
+    LITER = 3;
+    CC = 4;
+    GRAMS = 5;
+    KILO_GRAMS = 6;
+}
+
+enum MealTime {
+    Morning = 0;
+    Lunch = 1;
+    Dinner = 2;
+    Others = 3;
+}
+
+message CalendarItem {
+    string id = 1;
+    Date date = 2;
+    MealTime meal_time = 3;
+    int32 amount = 4;
+}
+
+message Food {
+    string id = 1;
+    string name = 2;
+    int32 total_amount = 3;
+    AmountUnit amount_unit = 4;
+    Date limit_date = 5;
+    repeated CalendarItem calendar_items = 6;
+}
+
+message FoodList {
+    repeated Food foods = 1;
+}
+
+message ProjectData {
+    string project_name = 1;
+    Date start_date = 2;
+    Date end_date = 3;
+    FoodList food_list = 4;
+}
+
+//// messages ////
+
+// NewProject
+
+message NewProjectRequest {
+    string project_name = 1;
+    Date start_date = 2;
+    Date end_date = 3;
+}
+
+message ProjectUri {
+    string project_hash = 1;
+}
+
+// LoadProjectData
+
+message LoadProjectDataRequest {
+    string project_hash = 1;
+}
+
+// AddFoodToList
+
+message AddFoodToListRequest {
+    string project_hash = 1;
+    Food food = 2;
+}
+
+// RemoveFoodsFromList
+
+message RemoveFoodsFromListRequest {
+    string project_hash = 1;
+    repeated string food_ids = 2;
+}
+
+// ModifyFoodInList
+
+message ModifyFoodInListRequest {
+    string project_hash = 1;
+    Food new_food_data = 2;
+}
+
+// PutFoodToCalendar
+
+message PutFoodToCalendarRequest {
+    string project_hash = 1;
+    string food_id = 2;
+    CalendarItem calendar_item = 3;
+}
+
+// RemoveFoodFromCalendar
+
+message RemoveFoodFromCalendarRequest {
+    string project_hash = 1;
+    string food_id = 2;
+    string calendar_item_id = 3;
+}
+
+// ModifyFoodAmountInCalendar
+
+message ModifyFoodAmountInCalendarRequest {
+    string project_hash = 1;
+    string food_id = 2;
+    string calendar_item_id = 3;
+    int32 new_amount = 4;
+}
+
+// MoveFoodInCalendar
+
+message MoveFoodInCalendarRequest {
+    string project_hash = 1;
+    string food_id = 2;
+    string calendar_item_id = 3;
+    Date new_date = 4;
+    MealTime new_meal_time = 5;
+}
