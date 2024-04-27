@@ -9,10 +9,13 @@ import (
 	"net/http"
 	"os"
 	"slash_mochi/cmd/server/config"
-	flexible_reversi_servce "slash_mochi/cmd/server/connect-apis/flexible-reversi"
+	can_i_use_up_food_service "slash_mochi/cmd/server/connect-apis/can-i-use-up-food"
+	flexible_reversi_service "slash_mochi/cmd/server/connect-apis/flexible-reversi"
 	omikuji_service "slash_mochi/cmd/server/connect-apis/omikuji"
 	test_service "slash_mochi/cmd/server/connect-apis/test"
+	can_i_use_up_food_store "slash_mochi/cmd/server/store/can-i-use-up-food"
 	flexible_reversi_store "slash_mochi/cmd/server/store/flexible-reversi"
+	"slash_mochi/gen/go/slash_mochi/v1/can_i_use_up_food/can_i_use_up_foodv1connect"
 	"slash_mochi/gen/go/slash_mochi/v1/flexible_reversi/flexible_reversiv1connect"
 	"slash_mochi/gen/go/slash_mochi/v1/omikuji/omikujiv1connect"
 	"slash_mochi/gen/go/slash_mochi/v1/test/testv1connect"
@@ -63,6 +66,7 @@ func connectServerRoutine(
 	ip string,
 	port int,
 	flexibleReversiStoreInterface *flexible_reversi_store.FlexibleReversiStoreInterfaces,
+	canIUseUpFoodStoreInterface *can_i_use_up_food_store.CanIUseUpFoodStoreInterfaces,
 ) {
 	mux := newServeMuxWithReflection()
 	interceptor := newInterCeptors()
@@ -78,9 +82,14 @@ func connectServerRoutine(
 	mux.Handle(omikujiPath, omikujiHandler)
 
 	// flexible-reversi servce
-	flexibleReversiService := flexible_reversi_servce.NewFlexibleReversiService(flexibleReversiStoreInterface)
+	flexibleReversiService := flexible_reversi_service.NewFlexibleReversiService(flexibleReversiStoreInterface)
 	flexibleReversiPath, flexibleReversiHandler := flexible_reversiv1connect.NewFlexibleReversiServiceHandler(flexibleReversiService, interceptor)
 	mux.Handle(flexibleReversiPath, flexibleReversiHandler)
+
+	// "Can I use up food" service
+	canIUseUpFoodService := can_i_use_up_food_service.NewCanIUseUpFoodService(canIUseUpFoodStoreInterface)
+	canIUseUpFoodPath, canIUseUpFoodHandler := can_i_use_up_foodv1connect.NewCanIUseUpFoodServiceHandler(canIUseUpFoodService, interceptor)
+	mux.Handle(canIUseUpFoodPath, canIUseUpFoodHandler)
 
 	// TODO: make CORS rules.
 	c := cors.AllowAll()
@@ -163,12 +172,14 @@ func main() {
 	// )
 
 	flexibleReversiStore := flexible_reversi_store.NewFlexibleReversiStore()
+	canIUseUpFoodStore := can_i_use_up_food_store.NewCanIUseUpFoodStore()
 
 	// start the connect server using main Go routine
 	go connectServerRoutine(
 		config.ConnectServer.Ip,
 		config.ConnectServer.Port,
 		flexibleReversiStore.Interfaces,
+		canIUseUpFoodStore.Interfaces,
 	)
 
 	errorToBreak := true
@@ -184,6 +195,8 @@ func main() {
 		case flexibleReversiGlobalChat := <-flexibleReversiStore.Interfaces.GlobalChatRequest:
 			flexibleReversiStore.Controllers.GlobalChat(flexibleReversiGlobalChat)
 		}
+		// Can I Use Up Food
+		// TODO
 	}
 
 	log.Println("fin server program")
