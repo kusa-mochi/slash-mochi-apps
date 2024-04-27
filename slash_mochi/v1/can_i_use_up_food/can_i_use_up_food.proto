@@ -14,6 +14,7 @@ service CanIUseUpFoodService {
     rpc RemoveFoodFromCalendar(RemoveFoodFromCalendarRequest) returns (FoodList);
     rpc ModifyFoodAmountInCalendar(ModifyFoodAmountInCalendarRequest) returns (FoodList);
     rpc MoveFoodInCalendar(MoveFoodInCalendarRequest) returns (FoodList);
+    rpc ModifyCalendarPeriod(ModifyCalendarPeriodRequest) returns (google.protobuf.Empty);
 }
 
 //// message parts ////
@@ -142,4 +143,12 @@ message MoveFoodInCalendarRequest {
     string calendar_item_id = 3;
     Date new_date = 4;
     MealTime new_meal_time = 5;
+}
+
+// ModifyCalendarPeriod
+
+message ModifyCalendarPeriodRequest {
+    string project_id = 1;
+    Date start_date = 2;
+    Date end_date = 3;
 }
