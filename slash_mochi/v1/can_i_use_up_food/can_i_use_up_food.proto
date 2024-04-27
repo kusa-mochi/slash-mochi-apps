@@ -80,40 +80,40 @@ message NewProjectRequest {
 }
 
 message ProjectUri {
-    string project_hash = 1;
+    string project_id = 1;
 }
 
 // LoadProjectData
 
 message LoadProjectDataRequest {
-    string project_hash = 1;
+    string project_id = 1;
 }
 
 // AddFoodToList
 
 message AddFoodToListRequest {
-    string project_hash = 1;
+    string project_id = 1;
     Food food = 2;
 }
 
 // RemoveFoodsFromList
 
 message RemoveFoodsFromListRequest {
-    string project_hash = 1;
+    string project_id = 1;
     repeated string food_ids = 2;
 }
 
 // ModifyFoodInList
 
 message ModifyFoodInListRequest {
-    string project_hash = 1;
+    string project_id = 1;
     Food new_food_data = 2;
 }
 
 // PutFoodToCalendar
 
 message PutFoodToCalendarRequest {
-    string project_hash = 1;
+    string project_id = 1;
     string food_id = 2;
     CalendarItem calendar_item = 3;
 }
@@ -121,7 +121,7 @@ message PutFoodToCalendarRequest {
 // RemoveFoodFromCalendar
 
 message RemoveFoodFromCalendarRequest {
-    string project_hash = 1;
+    string project_id = 1;
     string food_id = 2;
     string calendar_item_id = 3;
 }
@@ -129,7 +129,7 @@ message RemoveFoodFromCalendarRequest {
 // ModifyFoodAmountInCalendar
 
 message ModifyFoodAmountInCalendarRequest {
-    string project_hash = 1;
+    string project_id = 1;
     string food_id = 2;
     string calendar_item_id = 3;
     int32 new_amount = 4;
@@ -138,7 +138,7 @@ message ModifyFoodAmountInCalendarRequest {
 // MoveFoodInCalendar
 
 message MoveFoodInCalendarRequest {
-    string project_hash = 1;
+    string project_id = 1;
     string food_id = 2;
     string calendar_item_id = 3;
     Date new_date = 4;
