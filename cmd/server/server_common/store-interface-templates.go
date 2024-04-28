@@ -6,7 +6,7 @@ type GetRequest[DataType any] struct {
 
 func NewGetRequest[DataType any]() *GetRequest[DataType] {
 	return &GetRequest[DataType]{
-		ResChan: make(chan DataType, 100),
+		ResChan: make(chan DataType),
 	}
 }
 
@@ -18,7 +18,7 @@ type SetRequest[DataType any] struct {
 func NewSetRequest[DataType any](data DataType) *SetRequest[DataType] {
 	return &SetRequest[DataType]{
 		Data:    data,
-		ResChan: make(chan bool, 100),
+		ResChan: make(chan bool),
 	}
 }
 
@@ -30,6 +30,6 @@ type GetSetRequest[GetDataType any, SetDataType any] struct {
 func NewGetSetRequest[GetDataType any, SetDataType any](dataToSet SetDataType) *GetSetRequest[GetDataType, SetDataType] {
 	return &GetSetRequest[GetDataType, SetDataType]{
 		DataToSet: dataToSet,
-		ResChan:   make(chan GetDataType, 100),
+		ResChan:   make(chan GetDataType),
 	}
 }
