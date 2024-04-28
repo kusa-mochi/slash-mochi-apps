@@ -1,6 +1,9 @@
 package can_i_use_up_food_store
 
 import (
+	"crypto/sha256"
+	"fmt"
+	"io"
 	can_i_use_up_foodv1 "slash_mochi/gen/go/slash_mochi/v1/can_i_use_up_food"
 	"time"
 )
@@ -15,7 +18,20 @@ func NewCanIUseUpFoodStoreStructures() *CanIUseUpFoodStoreStructures {
 	}
 }
 
+// ID generator
+func GenerateNewId() string {
+	s256 := sha256.New()
+	now := time.Now().Format("2000-01-01 11:11:11.000000000")
+	io.WriteString(s256, now)
+
+	h := s256.Sum(nil)
+	hstr := fmt.Sprintf("%x", h)
+
+	return hstr
+}
+
 // ProjectData
+// use this for store response.
 
 type ProjectData struct {
 	projectName        string
@@ -32,6 +48,18 @@ func NewProjectData(projectName string, startDate time.Time, endDate time.Time) 
 		endDate:            endDate,
 		foods:              make([]*Food, 0),
 		calendarItemGroups: make([]*CalendarItemGroup, 0),
+	}
+}
+
+// ProjectUri
+
+type ProjectUri struct {
+	projectId string
+}
+
+func NewProjectUri() *ProjectUri {
+	return &ProjectUri{
+		projectId: GenerateNewId(),
 	}
 }
 

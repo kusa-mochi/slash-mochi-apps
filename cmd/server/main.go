@@ -194,9 +194,12 @@ func main() {
 			flexibleReversiStore.Controllers.ValidateUserId(flexibleReversiValidateUserId)
 		case flexibleReversiGlobalChat := <-flexibleReversiStore.Interfaces.GlobalChatRequest:
 			flexibleReversiStore.Controllers.GlobalChat(flexibleReversiGlobalChat)
-		}
 		// Can I Use Up Food
-		// TODO
+		case newProjectRequest := <-canIUseUpFoodStore.Interfaces.NewProjectRequest:
+			canIUseUpFoodStore.Controllers.NewProject(newProjectRequest)
+		case loadProjectDataRequest := <-canIUseUpFoodStore.Interfaces.LoadProjectDataRequest:
+			canIUseUpFoodStore.Controllers.LoadProjectData(loadProjectDataRequest)
+		}
 	}
 
 	log.Println("fin server program")
