@@ -18,18 +18,20 @@ func NewCanIUseUpFoodStoreStructures() *CanIUseUpFoodStoreStructures {
 // ProjectData
 
 type ProjectData struct {
-	projectName string
-	startDate   time.Time
-	endDate     time.Time
-	foodList    []*Food
+	projectName        string
+	startDate          time.Time
+	endDate            time.Time
+	foods              []*Food
+	calendarItemGroups []*CalendarItemGroup
 }
 
 func NewProjectData(projectName string, startDate time.Time, endDate time.Time) *ProjectData {
 	return &ProjectData{
-		projectName: projectName,
-		startDate:   startDate,
-		endDate:     endDate,
-		foodList:    make([]*Food, 0),
+		projectName:        projectName,
+		startDate:          startDate,
+		endDate:            endDate,
+		foods:              make([]*Food, 0),
+		calendarItemGroups: make([]*CalendarItemGroup, 0),
 	}
 }
 
@@ -81,5 +83,19 @@ func NewCalendarItem(
 		date:     date,
 		mealTime: mealTime,
 		amount:   amount,
+	}
+}
+
+// Calendar Item Group
+
+type CalendarItemGroup struct {
+	name            string
+	calendarItemIds []string
+}
+
+func NewCalendarItemGroup(name string) *CalendarItemGroup {
+	return &CalendarItemGroup{
+		name:            name,
+		calendarItemIds: make([]string, 0),
 	}
 }

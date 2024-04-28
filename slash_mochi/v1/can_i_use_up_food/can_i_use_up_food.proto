@@ -5,16 +5,19 @@ option go_package = "slash_mochi/gen/go/slash_mochi/v1/can_i_use_up_food;can_i_u
 import "google/protobuf/empty.proto";
 
 service CanIUseUpFoodService {
+    rpc UpdateAllData(UpdateAllDataRequest) returns (stream ProjectData);
+
     rpc NewProject(NewProjectRequest) returns (ProjectUri);
     rpc LoadProjectData(LoadProjectDataRequest) returns (ProjectData);
-    rpc AddFoodToList(AddFoodToListRequest) returns (FoodList);
-    rpc RemoveFoodsFromList(RemoveFoodsFromListRequest) returns (FoodList);
-    rpc ModifyFoodInList(ModifyFoodInListRequest) returns (FoodList);
-    rpc PutFoodToCalendar(PutFoodToCalendarRequest) returns (FoodList);
-    rpc RemoveFoodFromCalendar(RemoveFoodFromCalendarRequest) returns (FoodList);
-    rpc ModifyFoodAmountInCalendar(ModifyFoodAmountInCalendarRequest) returns (FoodList);
-    rpc MoveFoodInCalendar(MoveFoodInCalendarRequest) returns (FoodList);
+    rpc AddFoodToList(AddFoodToListRequest) returns (google.protobuf.Empty);
+    rpc RemoveFoodsFromList(RemoveFoodsFromListRequest) returns (google.protobuf.Empty);
+    rpc ModifyFoodInList(ModifyFoodInListRequest) returns (google.protobuf.Empty);
+    rpc PutFoodToCalendar(PutFoodToCalendarRequest) returns (google.protobuf.Empty);
+    rpc RemoveFoodFromCalendar(RemoveFoodFromCalendarRequest) returns (google.protobuf.Empty);
+    rpc ModifyFoodAmountInCalendar(ModifyFoodAmountInCalendarRequest) returns (google.protobuf.Empty);
+    rpc MoveFoodInCalendar(MoveFoodInCalendarRequest) returns (google.protobuf.Empty);
     rpc ModifyCalendarPeriod(ModifyCalendarPeriodRequest) returns (google.protobuf.Empty);
+    rpc MakeCalendarItemGroup(MakeCalendarItemGroupRequest) returns (google.protobuf.Empty);
 }
 
 //// message parts ////
@@ -49,6 +52,12 @@ message CalendarItem {
     int32 amount = 4;
 }
 
+// use this for ex:cuisine
+message CalendarItemGroup {
+    string name = 1;
+    repeated string calendar_item_ids = 2;
+}
+
 message Food {
     string id = 1;
     string name = 2;
@@ -58,18 +67,20 @@ message Food {
     repeated CalendarItem calendar_items = 6;
 }
 
-message FoodList {
-    repeated Food foods = 1;
-}
-
 message ProjectData {
     string project_name = 1;
     Date start_date = 2;
     Date end_date = 3;
-    FoodList food_list = 4;
+    repeated Food foods = 4;
 }
 
 //// messages ////
+
+// UpdateAllData
+
+message UpdateAllDataRequest {
+    string project_id = 1;
+}
 
 // NewProject
 
@@ -151,4 +162,12 @@ message ModifyCalendarPeriodRequest {
     string project_id = 1;
     Date start_date = 2;
     Date end_date = 3;
+}
+
+// MakeCalendarItemGroup
+
+message MakeCalendarItemGroupRequest {
+    string project_id = 1;
+    string group_name = 2;
+    repeated string calendar_item_ids = 3;
 }
