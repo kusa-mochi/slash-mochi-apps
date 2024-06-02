@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"log"
 	"os"
+	can_i_use_up_food_service_tester "slash_mochi/cmd/.client-stubs/can_i_use_up_food"
 	omikuji_service_tester "slash_mochi/cmd/.client-stubs/omikuji"
 	test_service_tester "slash_mochi/cmd/.client-stubs/test"
 	"slash_mochi/cmd/.client-stubs/test_kit"
@@ -44,7 +45,9 @@ func main() {
 
 	testServiceTester := test_service_tester.NewTestServiceTester(targetUrl)
 	omikujiServiceTester := omikuji_service_tester.NewOmikujiServiceTester(targetUrl)
+	canIUseUpFoodServiceTester := can_i_use_up_food_service_tester.NewCanIUseUpFoodServiceTester(targetUrl)
 
 	RunTest(testServiceTester)
 	RunTest(omikujiServiceTester)
+	RunTest(canIUseUpFoodServiceTester)
 }
