@@ -54,7 +54,7 @@ func (c *FlexibleReversiStoreControllers) BroadcastGlobalChat(req *server_common
 
 func (c *FlexibleReversiStoreControllers) ValidateUserId(req *server_common.GetSetRequest[bool, string]) {
 	userId := req.DataToSet
-	isCorrectUserId := c.data.ValidateUserId(userId)
+	isCorrectUserId := c.data.ValidateUserId(*userId)
 	req.ResChan <- isCorrectUserId
 }
 

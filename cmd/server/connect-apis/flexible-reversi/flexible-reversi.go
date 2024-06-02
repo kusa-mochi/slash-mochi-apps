@@ -47,7 +47,7 @@ func (s *FlexibleReversiService) GlobalChat(
 	// validate a user ID
 	validationResChan := make(chan bool)
 	s.storeInterface.ValidateUserIdRequest <- &server_common.GetSetRequest[bool, string]{
-		DataToSet: userId,
+		DataToSet: &userId,
 		ResChan:   validationResChan,
 	}
 	if isCorrectUserId := <-validationResChan; !isCorrectUserId {
@@ -72,14 +72,14 @@ func (s *FlexibleReversiService) GlobalChat(
 			return nil
 		} else if err != nil {
 			if ctx.Err() == context.Canceled {
-
+				panic("notimplemented") // TODO
 			}
 			return connect.NewError(connect.CodeInternal, fmt.Errorf("failed to receive global chat:%w", err))
 		}
 
 		newChatItemResChan := make(chan flexible_reversi_store.ChatItem)
 		s.storeInterface.GlobalChatRequest <- &server_common.GetSetRequest[flexible_reversi_store.ChatItem, flexible_reversi_store.ChatHistoryItem]{
-			DataToSet: *flexible_reversi_store.NewChatHistoryItem(
+			DataToSet: flexible_reversi_store.NewChatHistoryItem(
 				msg.GetMessage(),
 				msg.GetUserId(),
 			),
