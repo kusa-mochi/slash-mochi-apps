@@ -51,6 +51,30 @@ func NewProjectData(projectName string, startDate time.Time, endDate time.Time) 
 	}
 }
 
+func (d *ProjectData) Clone() *ProjectData {
+	// make copy of foods
+	foods := make([]*Food, 0)
+	for _, food := range d.foods {
+		copiedFood := food.Clone()
+		foods = append(foods, copiedFood)
+	}
+
+	// make copy of calendarItemGroups
+	calendarItemGroups := make([]*CalendarItemGroup, 0)
+	for _, group := range d.calendarItemGroups {
+		copiedGroup := group.Clone()
+		calendarItemGroups = append(calendarItemGroups, copiedGroup)
+	}
+
+	return &ProjectData{
+		projectName:        d.projectName,
+		startDate:          d.startDate.AddDate(0, 0, 0), // copy Time struct
+		endDate:            d.endDate.AddDate(0, 0, 0),   // copy Time struct
+		foods:              foods,
+		calendarItemGroups: calendarItemGroups,
+	}
+}
+
 // ProjectUri
 
 type ProjectUri struct {
@@ -91,6 +115,21 @@ func NewFood(
 	}
 }
 
+func (f *Food) Clone() *Food {
+	calendarItems := make([]*CalendarItem, 0)
+	for _, item := range f.calendarItems {
+		copiedItem := *item
+		calendarItems = append(calendarItems, &copiedItem)
+	}
+	return &Food{
+		id:            f.id,
+		name:          f.name,
+		totalAmount:   f.totalAmount,
+		limitDate:     f.limitDate,
+		calendarItems: calendarItems,
+	}
+}
+
 // Calendar Item
 
 type CalendarItem struct {
@@ -125,5 +164,15 @@ func NewCalendarItemGroup(name string) *CalendarItemGroup {
 	return &CalendarItemGroup{
 		name:            name,
 		calendarItemIds: make([]string, 0),
+	}
+}
+
+func (g *CalendarItemGroup) Clone() *CalendarItemGroup {
+	copiedIds := make([]string, 0)
+	copy(copiedIds, g.calendarItemIds)
+
+	return &CalendarItemGroup{
+		name:            g.name,
+		calendarItemIds: copiedIds,
 	}
 }
