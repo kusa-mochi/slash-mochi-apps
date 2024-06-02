@@ -95,7 +95,7 @@ func connectServerRoutine(
 	c := cors.AllowAll()
 	corsHandler := c.Handler(mux)
 
-	log.Println("listening requests to the connect server...")
+	log.Printf("listening requests to the connect server (%s:%v) ...", ip, port)
 	log.Fatal(
 		http.ListenAndServe(
 			fmt.Sprintf("%s:%v", ip, port),
@@ -108,6 +108,7 @@ func newServeMuxWithReflection() *http.ServeMux {
 	mux := http.NewServeMux()
 	reflector := grpcreflect.NewStaticReflector(
 		"slash_mochi.v1.TestService",
+		"slash_mochi.v1.CanIUseUpFoodService",
 	)
 	mux.Handle(grpcreflect.NewHandlerV1(reflector))
 	mux.Handle(grpcreflect.NewHandlerV1Alpha(reflector))
@@ -200,6 +201,7 @@ func main() {
 		case loadProjectDataRequest := <-canIUseUpFoodStore.Interfaces.LoadProjectDataRequest:
 			canIUseUpFoodStore.Controllers.LoadProjectData(loadProjectDataRequest)
 		}
+		log.Println("command received")
 	}
 
 	log.Println("fin server program")

@@ -2,6 +2,7 @@ package can_i_use_up_food_service
 
 import (
 	"context"
+	"slash_mochi/cmd/server/server_common"
 	can_i_use_up_food_store "slash_mochi/cmd/server/store/can-i-use-up-food"
 	can_i_use_up_foodv1 "slash_mochi/gen/go/slash_mochi/v1/can_i_use_up_food"
 
@@ -72,8 +73,15 @@ func (c *CanIUseUpFoodService) MoveFoodInCalendar(
 func (c *CanIUseUpFoodService) NewProject(
 	ctx context.Context,
 	req *connect.Request[can_i_use_up_foodv1.NewProjectRequest],
-) (*connect.Response[can_i_use_up_foodv1.ProjectUri], error) {
-	panic("unimplemented")
+) (*connect.Response[can_i_use_up_foodv1.NewID], error) {
+	request := server_common.NewGetSetRequest[string, can_i_use_up_foodv1.NewProjectRequest](
+		req.Msg,
+	)
+	c.storeInterface.NewProjectRequest <- request
+	res := <-request.ResChan
+	return connect.NewResponse(&can_i_use_up_foodv1.NewID{
+		Id: res,
+	}), nil
 }
 
 // PutFoodToCalendar implements can_i_use_up_foodv1connect.CanIUseUpFoodServiceHandler.
