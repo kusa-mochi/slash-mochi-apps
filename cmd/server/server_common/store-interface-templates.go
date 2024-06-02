@@ -23,11 +23,11 @@ func NewSetRequest[DataType any](data DataType) *SetRequest[DataType] {
 }
 
 type GetSetRequest[GetDataType any, SetDataType any] struct {
-	DataToSet SetDataType
+	DataToSet *SetDataType
 	ResChan   chan GetDataType
 }
 
-func NewGetSetRequest[GetDataType any, SetDataType any](dataToSet SetDataType) *GetSetRequest[GetDataType, SetDataType] {
+func NewGetSetRequest[GetDataType any, SetDataType any](dataToSet *SetDataType) *GetSetRequest[GetDataType, SetDataType] {
 	return &GetSetRequest[GetDataType, SetDataType]{
 		DataToSet: dataToSet,
 		ResChan:   make(chan GetDataType),
