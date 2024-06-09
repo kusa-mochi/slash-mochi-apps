@@ -1,4 +1,4 @@
-FROM buildpack-deps:bullseye-curl
+FROM buildpack-deps:22.04-curl
 ARG GO_VERSION
 ARG GO_BUILDER_OS
 ARG GO_BUILDER_ARCH

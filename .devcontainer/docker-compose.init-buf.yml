@@ -1,9 +1,8 @@
-version: "3.8"
 services:
   buf-builder:
-    image: whoatemyapplepie/slash-mochi-buf-builder:0.1.0
+    image: whoatemyapplepie/slash-mochi-apps-builder:${ENV_TOOLS_VERSION}
     build:
-      context: buf_builder
+      context: apps_builder
       args:
         - GO_VERSION=${GO_VERSION}
         - NODE_VERSION=${NODE_VERSION}
