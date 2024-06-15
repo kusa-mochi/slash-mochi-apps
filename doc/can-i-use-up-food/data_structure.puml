@@ -1,0 +1,49 @@
+@startuml data_structure
+
+agent CanIUseUpFoodStoreStructures
+
+agent ProjectData
+usecase プロジェクト名
+usecase 開始日
+usecase 終了日
+agent Food
+agent CalendarItemGroup
+
+usecase 食材ID
+usecase 食材名
+usecase 量
+usecase 単位
+usecase 使用期限
+agent CalendarItem
+
+usecase カレンダーアイテムID
+usecase 使用日
+usecase "朝／昼／夕／その他" as meal_time
+usecase 使用量
+
+usecase レシピ名
+
+CanIUseUpFoodStoreStructures "1" -- "0..N" ProjectData
+
+ProjectData -- プロジェクト名
+ProjectData -- 開始日
+ProjectData -- 終了日
+ProjectData "1" -- "0..N" Food
+ProjectData "1" -- "0..N" CalendarItemGroup
+
+Food -- 食材ID
+Food -- 食材名
+Food -- 量
+Food -- 単位
+Food -- 使用期限
+Food "1" -- "0..N" CalendarItem
+
+CalendarItem -- カレンダーアイテムID
+CalendarItem -- 使用日
+CalendarItem -- meal_time
+CalendarItem -- 使用量
+
+CalendarItemGroup -- レシピ名
+CalendarItemGroup "1" -- "0..N" カレンダーアイテムID
+
+@enduml
