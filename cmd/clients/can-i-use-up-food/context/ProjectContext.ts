@@ -1,19 +1,251 @@
+import { AmountUnit, MealTime } from "@/connect/can_i_use_up_food_pb"
 import { createContext } from "react"
 
-export type ProjectContextItemType = {
-    testChildName: string
+export type Date = {
+    year: number    // ex: 2024
+    month: number   // ex: 6 (means June)
+    date: number    // ex: 31
+}
+
+export type CalendarItemType = {
+    id: string
+    foodId: string
+    date: Date
+    mealTime: MealTime
+    amount: number
+}
+
+export type FoodType = {
+    id: string
+    name: string
+    totalAmount: number
+    amountUnit: AmountUnit
+    limitDate: Date
+    calendarItems: CalendarItemType[]
+}
+
+export type CalendarItemGroup = {
+    name: string
+    calendarItemIds: string[]
 }
 
 export type ProjectContextType = {
-    testName: string
-    testNumber: number
-    testChild: ProjectContextItemType
+    name: string
+    startDate: Date
+    endDate: Date
+    foods: FoodType[]
+    calendarItemGroups: CalendarItemGroup[]
 }
 
 export const ProjectContext = createContext<ProjectContextType>({
-    testName: "あばばば",
-    testNumber: 123,
-    testChild: {
-        testChildName: "おべべべ",
+    name: "テストプロジェクト",
+    startDate: {
+        year: 2024,
+        month: 6,
+        date: 25,
     },
+    endDate: {
+        year: 2024,
+        month: 7,
+        date: 10,
+    },
+    foods: [
+        {
+            id: "aaaaaaaaaa000",
+            name: "鶏もも肉",
+            totalAmount: 2,
+            amountUnit: AmountUnit.PIECES,
+            limitDate: {
+                year: 2024,
+                month: 6,
+                date: 28,
+            },
+            calendarItems: [
+                {
+                    id: "bbbbbbbbbbbbbbb000",
+                    foodId: "aaaaaaaaaa000",
+                    date: {
+                        year: 2024,
+                        month: 6,
+                        date: 26,
+                    },
+                    mealTime: MealTime.Dinner,
+                    amount: 1,
+                },
+                {
+                    id: "bbbbbbbbbbbbbbb001",
+                    foodId: "aaaaaaaaaa000",
+                    date: {
+                        year: 2024,
+                        month: 6,
+                        date: 28,
+                    },
+                    mealTime: MealTime.Lunch,
+                    amount: 1,
+                },
+            ],
+        },
+        {
+            id: "aaaaaaaaaa001",
+            name: "玉ねぎ",
+            totalAmount: 3,
+            amountUnit: AmountUnit.PIECES,
+            limitDate: {
+                year: 2024,
+                month: 7,
+                date: 10,
+            },
+            calendarItems: [
+                {
+                    id: "bbbbbbbbbbbbbbb002",
+                    foodId: "aaaaaaaaaa001",
+                    date: {
+                        year: 2024,
+                        month: 6,
+                        date: 26,
+                    },
+                    mealTime: MealTime.Dinner,
+                    amount: 2,
+                },
+            ],
+        },
+        {
+            id: "aaaaaaaaaa002",
+            name: "卵",
+            totalAmount: 8,
+            amountUnit: AmountUnit.PIECES,
+            limitDate: {
+                year: 2024,
+                month: 7,
+                date: 4,
+            },
+            calendarItems: [],
+        },
+        {
+            id: "aaaaaaaaaa003",
+            name: "にんじん",
+            totalAmount: 1,
+            amountUnit: AmountUnit.PIECES,
+            limitDate: {
+                year: 2024,
+                month: 6,
+                date: 30,
+            },
+            calendarItems: [
+                {
+                    id: "bbbbbbbbbbbbbbb003",
+                    foodId: "aaaaaaaaaa003",
+                    date: {
+                        year: 2024,
+                        month: 6,
+                        date: 26,
+                    },
+                    mealTime: MealTime.Dinner,
+                    amount: 1,
+                },
+            ],
+        },
+        {
+            id: "aaaaaaaaaa004",
+            name: "コーンフレーク",
+            totalAmount: 500,
+            amountUnit: AmountUnit.GRAMS,
+            limitDate: {
+                year: 2024,
+                month: 7,
+                date: 10,
+            },
+            calendarItems: [
+                {
+                    id: "bbbbbbbbbbbbbbb004",
+                    foodId: "aaaaaaaaaa004",
+                    date: {
+                        year: 2024,
+                        month: 7,
+                        date: 8,
+                    },
+                    mealTime: MealTime.Morning,
+                    amount: 100,
+                },
+                {
+                    id: "bbbbbbbbbbbbbbb005",
+                    foodId: "aaaaaaaaaa004",
+                    date: {
+                        year: 2024,
+                        month: 7,
+                        date: 9,
+                    },
+                    mealTime: MealTime.Morning,
+                    amount: 100,
+                },
+                {
+                    id: "bbbbbbbbbbbbbbb006",
+                    foodId: "aaaaaaaaaa004",
+                    date: {
+                        year: 2024,
+                        month: 7,
+                        date: 10,
+                    },
+                    mealTime: MealTime.Morning,
+                    amount: 100,
+                },
+            ],
+        },
+        {
+            id: "aaaaaaaaaa005",
+            name: "みかんジュース",
+            totalAmount: 300,
+            amountUnit: AmountUnit.MILLI_LITER,
+            limitDate: {
+                year: 2024,
+                month: 7,
+                date: 10,
+            },
+            calendarItems: [
+                {
+                    id: "bbbbbbbbbbbbbbb007",
+                    foodId: "aaaaaaaaaa005",
+                    date: {
+                        year: 2024,
+                        month: 7,
+                        date: 5,
+                    },
+                    mealTime: MealTime.Morning,
+                    amount: 100,
+                },
+                {
+                    id: "bbbbbbbbbbbbbbb008",
+                    foodId: "aaaaaaaaaa005",
+                    date: {
+                        year: 2024,
+                        month: 7,
+                        date: 6,
+                    },
+                    mealTime: MealTime.Morning,
+                    amount: 100,
+                },
+                {
+                    id: "bbbbbbbbbbbbbbb009",
+                    foodId: "aaaaaaaaaa005",
+                    date: {
+                        year: 2024,
+                        month: 7,
+                        date: 7,
+                    },
+                    mealTime: MealTime.Morning,
+                    amount: 100,
+                },
+            ],
+        },
+    ],
+    calendarItemGroups: [
+        {
+            name: "チキンカレー",
+            calendarItemIds: [
+                "bbbbbbbbbbbbbbb000",
+                "bbbbbbbbbbbbbbb002",
+                "bbbbbbbbbbbbbbb003",
+            ],
+        },
+    ],
 })
