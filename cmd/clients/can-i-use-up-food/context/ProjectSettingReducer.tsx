@@ -1,6 +1,5 @@
 import { DateType } from "@/types/Date"
 import { ProjectSettingType } from "@/types/ProjectSetting"
-import { Props } from "@/types/Props"
 import { ScriptProps } from "next/script"
 import { createContext, useReducer } from "react"
 
@@ -71,7 +70,7 @@ const defaultProjectSetting: ReturnType<typeof useProjectSettingReducer> = {
 }
 
 const ProjectSettingContext = createContext(defaultProjectSetting)
-function ProjectSettingProvider (props: Props) {
+function ProjectSettingProvider (props: ScriptProps) {
     return (
         <ProjectSettingContext.Provider value={useProjectSettingReducer()}>
             {props.children}
