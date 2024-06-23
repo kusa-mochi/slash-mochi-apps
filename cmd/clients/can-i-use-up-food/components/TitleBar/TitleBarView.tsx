@@ -1,6 +1,3 @@
-import { ProjectContext } from "@/context/_ProjectReducer"
-import { useContext } from "react"
-
 interface Props {
     title: string | undefined
 }
