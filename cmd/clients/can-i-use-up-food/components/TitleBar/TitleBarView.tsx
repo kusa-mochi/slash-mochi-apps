@@ -1,4 +1,4 @@
-import { ProjectContext } from "@/context/ProjectContext"
+import { ProjectContext } from "@/context/_ProjectReducer"
 import { useContext } from "react"
 
 interface Props {
