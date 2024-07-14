@@ -19,9 +19,9 @@ RUN curl -L https://nodejs.org/dist/v${NODE_VERSION}/node-v${NODE_VERSION}-${NOD
     unlink /usr/local/CHANGELOG.md && unlink /usr/local/LICENSE && unlink /usr/local/README.md
 
 # install go modules
-RUN go install github.com/bufbuild/buf/cmd/buf@latest &&\
-    go install github.com/fullstorydev/grpcurl/cmd/grpcurl@latest &&\
-    go install google.golang.org/protobuf/cmd/protoc-gen-go@latest &&\
+RUN go install github.com/bufbuild/buf/cmd/buf@latest && \
+    go install github.com/fullstorydev/grpcurl/cmd/grpcurl@latest && \
+    go install google.golang.org/protobuf/cmd/protoc-gen-go@latest && \
     go install connectrpc.com/connect/cmd/protoc-gen-connect-go@latest
 ENV PATH $PATH:/root/go/bin/
 
