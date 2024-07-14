@@ -27,7 +27,7 @@ ENV PATH $PATH:/root/go/bin/
 
 # install npm packages
 RUN npm i -g @bufbuild/buf @connectrpc/protoc-gen-connect-es @bufbuild/protoc-gen-es && \
-    npm i -g @connectrpc/connect @connectrpc/connect-web @bufbuild/protobuf
+    npm i -g @connectrpc/connect @connectrpc/connect-web
 ENV PATH $PATH:/usr/local/bin/
 
 ENV LANG C.UTF-8
