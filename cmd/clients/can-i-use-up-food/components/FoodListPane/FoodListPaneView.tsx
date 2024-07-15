@@ -1,5 +1,5 @@
 import { AmountUnit } from "@/connect/can_i_use_up_food_pb"
-import FoodListItem from "@/ui-parts/FoodListItem/FoodListItem"
+import FoodList from "@/ui-parts/FoodListItem/FoodList"
 import { useContext, useState } from "react"
 
 export default function FoodListPaneView() {
@@ -76,12 +76,7 @@ export default function FoodListPaneView() {
     return (
         <div className="h-full shadow-md bg-green-50">
             <div>foodlist-pane-view</div>
-            {foods.map((food) =>
-                <FoodListItem
-                    key={food.id}
-                    name={food.name}
-                ></FoodListItem>
-            )}
+            <FoodList foods={foods}></FoodList>
         </div>
     )
 }
