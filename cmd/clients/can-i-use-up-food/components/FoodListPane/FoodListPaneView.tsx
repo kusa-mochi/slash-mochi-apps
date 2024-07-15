@@ -1,5 +1,5 @@
 import { AmountUnit } from "@/connect/can_i_use_up_food_pb"
-import FoodList from "@/ui-parts/FoodListItem/FoodList"
+import FoodList from "@/ui-parts/FoodList/FoodList"
 import { useContext, useState } from "react"
 
 export default function FoodListPaneView() {
