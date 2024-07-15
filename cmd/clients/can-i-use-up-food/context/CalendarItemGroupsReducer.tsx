@@ -29,33 +29,25 @@ const calendarItemGroupsReducer = (state: CalendarItemGroupType[], action: Calen
     }    
 }
 
+const defaultCalendarItemGroupsState = [
+    {
+        id: "cccccccc000",
+        name: "チキンカレー",
+        calendarItemIds: [
+            "bbbbbbbbbbbbbbb000",
+            "bbbbbbbbbbbbbbb002",
+            "bbbbbbbbbbbbbbb003",
+        ],
+    },
+]
+
 function useCalendarItemGroupsReducer() {
-    const [state, dispatch] = useReducer(calendarItemGroupsReducer, [
-        {
-            id: "cccccccc000",
-            name: "チキンカレー",
-            calendarItemIds: [
-                "bbbbbbbbbbbbbbb000",
-                "bbbbbbbbbbbbbbb002",
-                "bbbbbbbbbbbbbbb003",
-            ],
-        },
-    ])
+    const [state, dispatch] = useReducer(calendarItemGroupsReducer, defaultCalendarItemGroupsState)
     return { state, dispatch }
 }
 
 const defaultCalendarItemGroups: ReturnType<typeof useCalendarItemGroupsReducer> = {
-    state: [
-        {
-            id: "cccccccc000",
-            name: "チキンカレー",
-            calendarItemIds: [
-                "bbbbbbbbbbbbbbb000",
-                "bbbbbbbbbbbbbbb002",
-                "bbbbbbbbbbbbbbb003",
-            ],
-        },
-    ],
+    state: defaultCalendarItemGroupsState,
     dispatch: () => {},
 }
 

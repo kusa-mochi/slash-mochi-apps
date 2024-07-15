@@ -34,38 +34,28 @@ const projectSettingReducer = (state: ProjectSettingType, action: ProjectSetting
     return next
 }
 
+const defaultProjectSettingState = {
+    projectName: "テストプロジェクト",
+    startDate: {
+        year: 2024,
+        month: 6,
+        date: 25,
+    },
+    endDate: {
+        year: 2024,
+        month: 7,
+        date: 10,
+    },
+}
+
 function useProjectSettingReducer() {
-    const [state, dispatch] = useReducer(projectSettingReducer, {
-        projectName: "テストプロジェクト",
-        startDate: {
-            year: 2024,
-            month: 6,
-            date: 25,
-        },
-        endDate: {
-            year: 2024,
-            month: 7,
-            date: 10,
-        },
-    })
+    const [state, dispatch] = useReducer(projectSettingReducer, defaultProjectSettingState)
 
     return { state, dispatch }
 }
 
 const defaultProjectSetting: ReturnType<typeof useProjectSettingReducer> = {
-    state: {
-        projectName: "テストプロジェクト",
-        startDate: {
-            year: 2024,
-            month: 6,
-            date: 25,
-        },
-        endDate: {
-            year: 2024,
-            month: 7,
-            date: 10,
-        },
-    },
+    state: defaultProjectSettingState,
     dispatch: () => {},
 }
 
