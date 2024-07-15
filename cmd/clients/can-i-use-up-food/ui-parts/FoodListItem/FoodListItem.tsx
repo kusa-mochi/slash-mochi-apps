@@ -1,9 +1,16 @@
 import FoodListItemView from "./FoodListItemView";
 
-export default function FoodListItem() {
+type Props = {
+    key: string
+    name: string
+}
+
+export default function FoodListItem(props: Props) {
     return (
         <>
-            <FoodListItemView></FoodListItemView>
+            <FoodListItemView
+                name={props.name}
+            ></FoodListItemView>
         </>
     )
 }
