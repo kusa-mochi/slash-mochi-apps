@@ -1,5 +1,7 @@
 import { CalendarItemType } from "@/types/CalendarItem"
 import CalendarColumnView from "./CalendarColumnView"
+import { useContext } from "react"
+import { FoodsContext } from "@/context/FoodsReducer"
 
 type Props = {
     key: string
@@ -8,9 +10,10 @@ type Props = {
 }
 
 export default function CalendarColumn(props: Props) {
+    const { state: foods } = useContext(FoodsContext)
     return (
         <>
-            <CalendarColumnView date={props.date} calendarItems={props.calendarItems}></CalendarColumnView>
+            <CalendarColumnView date={props.date} calendarItems={props.calendarItems} foods={foods}></CalendarColumnView>
         </>
     )
 }
