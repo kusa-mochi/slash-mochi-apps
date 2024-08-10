@@ -6,14 +6,23 @@ import { FoodsContext } from "@/context/FoodsReducer"
 type Props = {
     key: string
     date: Date
-    calendarItems: CalendarItemType[]
+    morningCalendarItems: CalendarItemType[]
+    lunchCalendarItems: CalendarItemType[]
+    dinnerCalendarItems: CalendarItemType[]
+    otherCalendarItems: CalendarItemType[]
 }
 
 export default function CalendarColumn(props: Props) {
     const { state: foods } = useContext(FoodsContext)
     return (
         <>
-            <CalendarColumnView date={props.date} calendarItems={props.calendarItems} foods={foods}></CalendarColumnView>
+            <CalendarColumnView
+                date={props.date}
+                morningCalendarItems={props.morningCalendarItems}
+                lunchCalendarItems={props.lunchCalendarItems}
+                dinnerCalendarItems={props.dinnerCalendarItems}
+                otherCalendarItems={props.otherCalendarItems}
+                foods={foods} />
         </>
     )
 }
