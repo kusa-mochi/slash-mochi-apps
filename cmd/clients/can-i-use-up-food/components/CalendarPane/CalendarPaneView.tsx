@@ -33,11 +33,14 @@ export default function CalendarPaneView(props: Props) {
     return (
         <>
             <div className="flex flex-row flex-nowrap justify-start items-stretch h-full">
-                <div className="grow-0 w-32 flex flex-col flex-nowrap justify-around items-center">
-                    <div>朝</div>
-                    <div>昼</div>
-                    <div>夜</div>
-                    <div>その他</div>
+                <div className="grow-0 w-32 flex flex-col flex-nowrap justify-start items-start">
+                    <div className="h-28 w-px"></div>
+                    <div className="grow flex flex-col flex-nowrap justify-around items-center">
+                        <div>朝</div>
+                        <div>昼</div>
+                        <div>夜</div>
+                        <div>その他</div>
+                    </div>
                 </div>
                 <div className="grow overflow-x-auto scroll-smooth flex flex-row flex-nowrap justify-start items-start">
                     {calendarColumns}
