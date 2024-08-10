@@ -12,8 +12,10 @@ export default function CalendarColumnView(props: Props) {
     console.log(props.calendarItems)
     return (
         <>
-            <div>
+            <div className="flex flex-col flex-nowrap justify-start items-stretch">
+                {/* date */}
                 <div className="m-8">{`${props.date.getFullYear()}/${props.date.getMonth() + 1}/${props.date.getDate()}`}</div>
+                {/* calendar items */}
                 <div>
                     {props.calendarItems.map((item) =>
                         <div>{props.foods.find((food) => food.id === item.foodId)?.name} {item.amount}</div>
