@@ -1,4 +1,4 @@
-import { MealTime } from "@/connect/can_i_use_up_food_pb"
+import { AmountUnit, MealTime } from "@/connect/can_i_use_up_food_pb"
 import { CalendarItemType } from "@/types/CalendarItem"
 import { FoodType } from "@/types/Food"
 
@@ -12,6 +12,24 @@ type Props = {
 }
 
 export default function CalendarColumnView(props: Props) {
+    const getAmountUnitString = (unit: AmountUnit): string => {
+        switch (unit) {
+            case AmountUnit.NONE:
+                return ""
+            case AmountUnit.PIECES:
+                return "個"
+            case AmountUnit.MILLI_LITER:
+                return "ml"
+            case AmountUnit.LITER:
+                return "L"
+            case AmountUnit.CC:
+                return "cc"
+            case AmountUnit.GRAMS:
+                return "g"
+            case AmountUnit.KILO_GRAMS:
+                return "kg"
+        }
+    }
     return (
         <>
             <div className="grid grid-rows-[112px_1fr_1fr_1fr_1fr] grid-cols-[200px] h-full border-r-2">
@@ -21,37 +39,37 @@ export default function CalendarColumnView(props: Props) {
                 {/* calendar items */}
                 <div className="border-t-4 p-2">
                     {props.morningCalendarItems.map((item: CalendarItemType) => {
-                        const morningFoodItem: FoodType | undefined = props.foods.find((food: FoodType) => food.id === item.foodId)
-                        if (morningFoodItem === undefined) return null
+                        const foodItem: FoodType | undefined = props.foods.find((food: FoodType) => food.id === item.foodId)
+                        if (foodItem === undefined) return null
 
-                        return <div>{morningFoodItem.name} {item.amount}</div>
+                        return <div>{foodItem.name} {item.amount} {getAmountUnitString(foodItem.amountUnit)}</div>
                     })}
                 </div>
                 
                 <div className="border-t-2 border-dashed p-2">
                     {props.lunchCalendarItems.map((item: CalendarItemType) => {
-                        const morningFoodItem: FoodType | undefined = props.foods.find((food: FoodType) => food.id === item.foodId)
-                        if (morningFoodItem === undefined) return null
+                        const foodItem: FoodType | undefined = props.foods.find((food: FoodType) => food.id === item.foodId)
+                        if (foodItem === undefined) return null
 
-                        return <div>{morningFoodItem.name} {item.amount}</div>
+                        return <div>{foodItem.name} {item.amount} {getAmountUnitString(foodItem.amountUnit)}</div>
                     })}
                 </div>
 
                 <div className="border-t-2 border-dashed p-2">
                     {props.dinnerCalendarItems.map((item: CalendarItemType) => {
-                        const morningFoodItem: FoodType | undefined = props.foods.find((food: FoodType) => food.id === item.foodId)
-                        if (morningFoodItem === undefined) return null
+                        const foodItem: FoodType | undefined = props.foods.find((food: FoodType) => food.id === item.foodId)
+                        if (foodItem === undefined) return null
 
-                        return <div>{morningFoodItem.name} {item.amount}</div>
+                        return <div>{foodItem.name} {item.amount} {getAmountUnitString(foodItem.amountUnit)}</div>
                     })}
                 </div>
                 
                 <div className="border-t-2 border-dashed p-2">
                     {props.otherCalendarItems.map((item: CalendarItemType) => {
-                        const morningFoodItem: FoodType | undefined = props.foods.find((food: FoodType) => food.id === item.foodId)
-                        if (morningFoodItem === undefined) return null
+                        const foodItem: FoodType | undefined = props.foods.find((food: FoodType) => food.id === item.foodId)
+                        if (foodItem === undefined) return null
 
-                        return <div>{morningFoodItem.name} {item.amount}</div>
+                        return <div>{foodItem.name} {item.amount} {getAmountUnitString(foodItem.amountUnit)}</div>
                     })}
                 </div>
             </div>
