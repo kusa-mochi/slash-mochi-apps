@@ -8,7 +8,6 @@ export default function FoodListPane() {
     const { state: foods } = useContext(FoodsContext)
     return (
         <>
-            <div>{projectSettings.projectName}</div>
             <FoodListPaneView foods={foods}></FoodListPaneView>
         </>
     )

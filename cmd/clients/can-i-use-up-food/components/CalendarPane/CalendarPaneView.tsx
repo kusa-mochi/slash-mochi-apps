@@ -60,7 +60,7 @@ export default function CalendarPaneView(props: Props) {
         <div className="flex flex-row flex-nowrap justify-start items-stretch h-full">
             <div className="grow-0 w-32 flex flex-col flex-nowrap justify-start items-start">
                 <div className="h-28 w-px"></div>
-                <div className="grow flex flex-col flex-nowrap justify-around items-center">
+                <div className="grow flex flex-col flex-nowrap justify-around items-center w-20">
                     <div>朝</div>
                     <div>昼</div>
                     <div>夜</div>

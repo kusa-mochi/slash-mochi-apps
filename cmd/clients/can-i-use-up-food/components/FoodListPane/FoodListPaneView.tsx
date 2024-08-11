@@ -11,7 +11,6 @@ export default function FoodListPaneView(props: Props) {
     const foods = props.foods
     return (
         <div className="w-80 h-full shadow-md bg-green-50">
-            <div>foodlist-pane-view</div>
             <FoodList foods={foods}></FoodList>
         </div>
     )
