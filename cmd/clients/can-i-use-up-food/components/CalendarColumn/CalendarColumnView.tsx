@@ -19,7 +19,7 @@ export default function CalendarColumnView(props: Props) {
                 <div className="m-8 h-12 content-center">{`${props.date.getFullYear()}/${props.date.getMonth() + 1}/${props.date.getDate()}`}</div>
                 {/* calendar items */}
                 <div className="grow flex flex-col flex-nowrap justify-around items-center">
-                    <div className="m-px">
+                    <div>
                         {props.morningCalendarItems.map((item: CalendarItemType) => {
                             console.log(`mealtime: ${item.mealTime}, food id: ${item.foodId}`)
 
@@ -30,7 +30,7 @@ export default function CalendarColumnView(props: Props) {
                         })}
                     </div>
                     
-                    <div className="m-px">
+                    <div>
                         {props.lunchCalendarItems.map((item: CalendarItemType) => {
                             const morningFoodItem: FoodType | undefined = props.foods.find((food: FoodType) => food.id === item.foodId)
                             if (morningFoodItem === undefined) return null
@@ -39,7 +39,7 @@ export default function CalendarColumnView(props: Props) {
                         })}
                     </div>
 
-                    <div className="m-px">
+                    <div>
                         {props.dinnerCalendarItems.map((item: CalendarItemType) => {
                             const morningFoodItem: FoodType | undefined = props.foods.find((food: FoodType) => food.id === item.foodId)
                             if (morningFoodItem === undefined) return null
@@ -48,7 +48,7 @@ export default function CalendarColumnView(props: Props) {
                         })}
                     </div>
                     
-                    <div className="m-px">
+                    <div>
                         {props.otherCalendarItems.map((item: CalendarItemType) => {
                             const morningFoodItem: FoodType | undefined = props.foods.find((food: FoodType) => food.id === item.foodId)
                             if (morningFoodItem === undefined) return null
