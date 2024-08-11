@@ -1,6 +1,7 @@
 import { AmountUnit, MealTime } from "@/connect/can_i_use_up_food_pb"
 import { CalendarItemType } from "@/types/CalendarItem"
 import { FoodType } from "@/types/Food"
+import CalendarItem from "@/ui-parts/CalendarItem/CalendarItem"
 
 type Props = {
     date: Date
@@ -12,27 +13,9 @@ type Props = {
 }
 
 export default function CalendarColumnView(props: Props) {
-    const getAmountUnitString = (unit: AmountUnit): string => {
-        switch (unit) {
-            case AmountUnit.NONE:
-                return ""
-            case AmountUnit.PIECES:
-                return "個"
-            case AmountUnit.MILLI_LITER:
-                return "ml"
-            case AmountUnit.LITER:
-                return "L"
-            case AmountUnit.CC:
-                return "cc"
-            case AmountUnit.GRAMS:
-                return "g"
-            case AmountUnit.KILO_GRAMS:
-                return "kg"
-        }
-    }
     return (
         <>
-            <div className="grid grid-rows-[112px_1fr_1fr_1fr_1fr] grid-cols-[200px] h-full border-r-2">
+            <div className="grid grid-rows-[80px_1fr_1fr_1fr_1fr] grid-cols-[200px] h-full border-r-2">
                 {/* date */}
                 <div className="content-center text-center">{`${props.date.getFullYear()}/${props.date.getMonth() + 1}/${props.date.getDate()}`}</div>
 
@@ -41,8 +24,7 @@ export default function CalendarColumnView(props: Props) {
                     {props.morningCalendarItems.map((item: CalendarItemType) => {
                         const foodItem: FoodType | undefined = props.foods.find((food: FoodType) => food.id === item.foodId)
                         if (foodItem === undefined) return null
-
-                        return <div>{foodItem.name} {item.amount} {getAmountUnitString(foodItem.amountUnit)}</div>
+                        return <CalendarItem key={item.id} foodName={foodItem.name} amount={item.amount} unit={foodItem.amountUnit} />
                     })}
                 </div>
                 
@@ -50,8 +32,7 @@ export default function CalendarColumnView(props: Props) {
                     {props.lunchCalendarItems.map((item: CalendarItemType) => {
                         const foodItem: FoodType | undefined = props.foods.find((food: FoodType) => food.id === item.foodId)
                         if (foodItem === undefined) return null
-
-                        return <div>{foodItem.name} {item.amount} {getAmountUnitString(foodItem.amountUnit)}</div>
+                        return <CalendarItem key={item.id} foodName={foodItem.name} amount={item.amount} unit={foodItem.amountUnit} />
                     })}
                 </div>
 
@@ -59,8 +40,7 @@ export default function CalendarColumnView(props: Props) {
                     {props.dinnerCalendarItems.map((item: CalendarItemType) => {
                         const foodItem: FoodType | undefined = props.foods.find((food: FoodType) => food.id === item.foodId)
                         if (foodItem === undefined) return null
-
-                        return <div>{foodItem.name} {item.amount} {getAmountUnitString(foodItem.amountUnit)}</div>
+                        return <CalendarItem key={item.id} foodName={foodItem.name} amount={item.amount} unit={foodItem.amountUnit} />
                     })}
                 </div>
                 
@@ -68,8 +48,7 @@ export default function CalendarColumnView(props: Props) {
                     {props.otherCalendarItems.map((item: CalendarItemType) => {
                         const foodItem: FoodType | undefined = props.foods.find((food: FoodType) => food.id === item.foodId)
                         if (foodItem === undefined) return null
-
-                        return <div>{foodItem.name} {item.amount} {getAmountUnitString(foodItem.amountUnit)}</div>
+                        return <CalendarItem key={item.id} foodName={foodItem.name} amount={item.amount} unit={foodItem.amountUnit} />
                     })}
                 </div>
             </div>

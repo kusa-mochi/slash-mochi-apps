@@ -1,9 +1,16 @@
+import { AmountUnit } from "@/connect/can_i_use_up_food_pb";
 import CalendarItemView from "./CalendarItemView";
 
-export default function CalendarItem() {
+type Props = {
+    foodName: string
+    amount: number
+    unit: AmountUnit
+}
+
+export default function CalendarItem(props: Props) {
     return (
         <>
-            <CalendarItemView></CalendarItemView>
+            <CalendarItemView foodName={props.foodName} amount={props.amount} unit={props.unit} />
         </>
     )
 }
