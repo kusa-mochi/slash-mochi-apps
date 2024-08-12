@@ -14,7 +14,7 @@ export default function Home() {
       <FoodsProvider>
         <CalendarItemsProvider>
           <CalendarItemGroupsProvider>
-            <main className="flex flex-col items-center justify-start h-screen">
+            <main className="flex flex-col items-center justify-start h-screen text-gray-800">
               <TitleBar></TitleBar>
               <MainPane></MainPane>
             </main>
