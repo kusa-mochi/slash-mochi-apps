@@ -27,7 +27,7 @@ export default function CalendarItemView(props: Props) {
     }
 
     return (
-        <div className="w-full shadow-md bg-green-400 rounded-full flex flex-row flex-nowrap justify-between items-center">
+        <div className="w-full shadow-md bg-green-200 rounded-full flex flex-row flex-nowrap justify-between items-center">
             <div className="grow">{props.foodName} {props.amount} {getAmountUnitString(props.unit)}</div>
             <div>︙</div>
         </div>
