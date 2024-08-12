@@ -1,4 +1,5 @@
 import { FoodType } from "@/types/Food"
+import FoodListItem from "../FoodListItem/FoodListItem"
 
 type Props = {
     foods: FoodType[]
@@ -6,12 +7,12 @@ type Props = {
 
 export default function FoodListView(props: Props) {
     return (
-        <div>
+        <>
             {props.foods?.map((food) =>
-                <div key={food.id}>
-                    <input type="checkbox" id={food.id} name="food_list" /><label>{food.name}</label>
+                <div key={food.id} className="mb-2">
+                    <FoodListItem name={food.name} amount={food.totalAmount} unit={food.amountUnit} />
                 </div>
             )}
-        </div>
+        </>
     )
 }

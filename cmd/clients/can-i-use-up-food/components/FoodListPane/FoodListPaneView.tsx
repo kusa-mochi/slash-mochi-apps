@@ -10,7 +10,7 @@ type Props = {
 export default function FoodListPaneView(props: Props) {
     const foods = props.foods
     return (
-        <div className="w-80 h-full shadow-md bg-green-50">
+        <div className="w-80 h-full p-2 shadow-md bg-green-50">
             <FoodList foods={foods}></FoodList>
         </div>
     )
