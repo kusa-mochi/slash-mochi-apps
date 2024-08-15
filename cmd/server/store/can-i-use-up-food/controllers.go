@@ -17,6 +17,13 @@ func NewCanIUseUpFoodStoreControllers() *CanIUseUpFoodStoreControllers {
 	}
 }
 
+func (c *CanIUseUpFoodStoreControllers) AddFoodToList(req *server_common.SetRequest[can_i_use_up_foodv1.Food]) {
+
+	// TODO
+
+	req.ResChan <- true
+}
+
 func (c *CanIUseUpFoodStoreControllers) LoadProjectData(req *server_common.GetSetRequest[ProjectData, can_i_use_up_foodv1.LoadProjectDataRequest]) {
 	projectId := req.DataToSet.GetProjectId()
 

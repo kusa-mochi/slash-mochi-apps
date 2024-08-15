@@ -196,10 +196,12 @@ func main() {
 		case flexibleReversiGlobalChat := <-flexibleReversiStore.Interfaces.GlobalChatRequest:
 			flexibleReversiStore.Controllers.GlobalChat(flexibleReversiGlobalChat)
 		// Can I Use Up Food
-		case newProjectRequest := <-canIUseUpFoodStore.Interfaces.NewProjectRequest:
-			canIUseUpFoodStore.Controllers.NewProject(newProjectRequest)
+		case addFoodToListRequest := <-canIUseUpFoodStore.Interfaces.AddFoodToList:
+			canIUseUpFoodStore.Controllers.AddFoodToList(addFoodToListRequest)
 		case loadProjectDataRequest := <-canIUseUpFoodStore.Interfaces.LoadProjectDataRequest:
 			canIUseUpFoodStore.Controllers.LoadProjectData(loadProjectDataRequest)
+		case newProjectRequest := <-canIUseUpFoodStore.Interfaces.NewProjectRequest:
+			canIUseUpFoodStore.Controllers.NewProject(newProjectRequest)
 		}
 		log.Println("command received")
 	}
