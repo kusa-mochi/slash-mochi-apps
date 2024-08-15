@@ -16,6 +16,8 @@
 
 ### remove a post
 
+### vote up a post
+
 ### comment to a post
 
 ### scroll comments
@@ -36,10 +38,14 @@
 
 ### remove an acount
 
-## No Functions
+## Functions NOT to be implemented
 
 ### post with images
 
 ### post with urls
 
+### post with sounds
+
 ### re-post
+
+### vote down a post
