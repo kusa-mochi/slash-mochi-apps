@@ -13,8 +13,21 @@ type CanIUseUpFoodStoreStructures struct {
 }
 
 func NewCanIUseUpFoodStoreStructures() *CanIUseUpFoodStoreStructures {
+	// TODO: this is dummy data for debugging
+	var projects map[string]*ProjectData = map[string]*ProjectData{}
+	location, _ := time.LoadLocation("UTC")
+	var dummyData *ProjectData = NewProjectData(
+		"テストサーバープロジェクト",
+		time.Date(2024, 8, 12, 0, 0, 0, 0, location),
+		time.Date(2024, 9, 10, 0, 0, 0, 0, location),
+	)
+	var dummyProjectId string = "abc"
+	projects[dummyProjectId] = dummyData
+
 	return &CanIUseUpFoodStoreStructures{
-		projects: map[string]*ProjectData{},
+		// TODO: this is dummy data for dubugging
+		projects: projects,
+		// projects: map[string]*ProjectData{},
 	}
 }
 
