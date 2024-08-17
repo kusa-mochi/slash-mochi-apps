@@ -1,7 +1,20 @@
-version: "3.8"
 services:
+
+  start-db:
+    image: whoatemyapplepie/postgres:14.13-bullseye
+    build:
+      context: dev_postgres
+    container_name: dev_postgres
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_PASSWORD=testdb
+    volumes:
+      - db-store:/var/lib/postgresql/data
+
   start-server:
     image: buildpack-deps:bullseye-curl
+    container_name: dev_serverapps
     volumes:
       - ../:/project
     ports:
@@ -14,3 +27,6 @@ services:
         cd /project/dist/${GO_TARGET_OS}/${GO_TARGET_ARCH}/server &&
         chmod +x ./slash_mochi_server &&
         ./slash_mochi_server'
+
+volumes:
+  db-store:
