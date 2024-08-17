@@ -5,12 +5,15 @@ services:
     build:
       context: dev_postgres
     container_name: dev_postgres
+    restart: always
     ports:
       - 5432:5432
     environment:
       - POSTGRES_PASSWORD=testdb
     volumes:
       - db-store:/var/lib/postgresql/data
+    networks:
+      - postgres_network
 
   start-server:
     image: buildpack-deps:bullseye-curl
@@ -27,6 +30,17 @@ services:
         cd /project/dist/${GO_TARGET_OS}/${GO_TARGET_ARCH}/server &&
         chmod +x ./slash_mochi_server &&
         ./slash_mochi_server'
+  
+  # DB management
+  adminer:
+    image: adminer:4.8.1
+    restart: always
+    ports:
+      - 8080:8080
 
 volumes:
   db-store:
+
+networks:
+  postgres_network:
+    driver: bridge
